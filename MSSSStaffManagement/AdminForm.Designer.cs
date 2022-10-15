@@ -58,6 +58,7 @@
             this.textBoxKeyBinds.Text = "Alt+C » Navigate to Phone ID\r\nAlt+X » Navigate to Name\r\nAlt+F » Create New Staff " +
     "ID\r\nAlt+V » Update Name\r\nAlt+S » Delete ID\r\nAlt+T » Rollback Staff List\r\nAlt+L »" +
     " Exit\r\nEnter » Confirm Changes";
+            this.textBoxKeyBinds.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox_MouseClick);
             // 
             // groupBoxKeyBinds
             // 
@@ -81,7 +82,7 @@
             this.groupBox2.Size = new System.Drawing.Size(232, 123);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Create/Alter/Delete Staff ID";
+            this.groupBox2.Text = "Staff ID Admin Form";
             // 
             // label2
             // 
@@ -115,6 +116,7 @@
             this.textBoxNameAdmin.Name = "textBoxNameAdmin";
             this.textBoxNameAdmin.Size = new System.Drawing.Size(148, 20);
             this.textBoxNameAdmin.TabIndex = 0;
+            this.textBoxNameAdmin.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox_MouseClick);
             this.textBoxNameAdmin.TextChanged += new System.EventHandler(this.textBox_TextChanged);
             // 
             // textBoxPhoneAdmin
@@ -124,6 +126,7 @@
             this.textBoxPhoneAdmin.ReadOnly = true;
             this.textBoxPhoneAdmin.Size = new System.Drawing.Size(148, 20);
             this.textBoxPhoneAdmin.TabIndex = 1;
+            this.textBoxPhoneAdmin.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox_MouseClick);
             this.textBoxPhoneAdmin.TextChanged += new System.EventHandler(this.textBox_TextChanged);
             this.textBoxPhoneAdmin.Leave += new System.EventHandler(this.textBoxPhoneAdmin_Leave);
             // 
@@ -161,7 +164,7 @@
             this.Controls.Add(this.groupBoxKeyBinds);
             this.KeyPreview = true;
             this.Name = "AdminForm";
-            this.Text = "AdminForm";
+            this.Text = "MSSS Staff Management Admin Form";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AdminForm_FormClosing);
             this.Load += new System.EventHandler(this.AdminForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AdminForm_KeyDown);

@@ -60,8 +60,10 @@
             this.listBoxFiltered.FormattingEnabled = true;
             this.listBoxFiltered.Location = new System.Drawing.Point(379, 12);
             this.listBoxFiltered.Name = "listBoxFiltered";
+            this.listBoxFiltered.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.listBoxFiltered.Size = new System.Drawing.Size(180, 238);
             this.listBoxFiltered.TabIndex = 1;
+            this.listBoxFiltered.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listBoxFiltered_MouseClick);
             // 
             // textBoxPhone
             // 
@@ -69,6 +71,7 @@
             this.textBoxPhone.Name = "textBoxPhone";
             this.textBoxPhone.Size = new System.Drawing.Size(102, 20);
             this.textBoxPhone.TabIndex = 2;
+            this.textBoxPhone.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox_MouseClick);
             this.textBoxPhone.TextChanged += new System.EventHandler(this.textBox_TextChanged);
             // 
             // textBoxName
@@ -77,6 +80,7 @@
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(102, 20);
             this.textBoxName.TabIndex = 3;
+            this.textBoxName.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox_MouseClick);
             this.textBoxName.TextChanged += new System.EventHandler(this.textBox_TextChanged);
             // 
             // labelPhone
@@ -167,7 +171,7 @@
             this.Controls.Add(this.listBoxRead);
             this.KeyPreview = true;
             this.Name = "GeneralForm";
-            this.Text = "Staff Management Form";
+            this.Text = "MSSS Staff Management General Form";
             this.Load += new System.EventHandler(this.GerneralForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GerneralForm_KeyDown);
             this.groupBoxInput.ResumeLayout(false);

@@ -25,12 +25,12 @@ namespace MSSSStaffManagement
         {
             InitializeComponent();
         }
-        public static Dictionary<string, string> MasterFile = new Dictionary<string, string>();
-        public static Dictionary<string, string> backupDict = MasterFile;
+        public static SortedDictionary<string, string> MasterFile = new SortedDictionary<string, string>();
+        public static SortedDictionary<string, string> backupDict = MasterFile;
         string path = @"MalinStaffNamesV2.csv";
 
         #region Global Methods
-        public static string ReadFile(string path, Dictionary<string, string> MasterFile)
+        public static string ReadFile(string path)
         {
             try
             {
@@ -50,17 +50,17 @@ namespace MSSSStaffManagement
                  return "Values already exist within list.";
             }
         }
-        public static Dictionary<string, string> GetDictionary()
+        public static SortedDictionary<string, string> GetDictionary()
         {
             return MasterFile;
         }
-        public static void SaveData(string path, Dictionary<string, string> keyValues)
+        public static void SaveData(string path)
         {
             try
             {
                 using (StreamWriter writer = new StreamWriter(File.Open(path, FileMode.Open), Encoding.UTF8))
                 {
-                    foreach (var item in keyValues)
+                    foreach (var item in MasterFile)
                         writer.WriteLine(item.Key + "," + item.Value);
                 }
                 Trace.TraceInformation("Saved to file. Path: " + path);
@@ -70,7 +70,7 @@ namespace MSSSStaffManagement
                 Trace.TraceInformation("Error occurred during saving");
             }
         }
-        public static void SetDictionary(Dictionary<string, string> dict)
+        public static void SetDictionary(SortedDictionary<string, string> dict)
         {
             MasterFile = dict;
         }
@@ -84,10 +84,10 @@ namespace MSSSStaffManagement
             textBoxName.Text = kvp[1];
             statusLabel.Text = item + " selected.";
         }
-        private void DisplayItems(ListBox listBox, Dictionary<string, string> keyValues)
+        private void DisplayItems(ListBox listBox)
         {
             listBox.Items.Clear();
-            foreach (var item in keyValues)
+            foreach (var item in MasterFile)
             {
                 listBox.Items.Add(item.Key + " " + item.Value);
             }
@@ -108,7 +108,7 @@ namespace MSSSStaffManagement
                 {
                     AdminForm adminForm = new AdminForm(textBoxPhone.Text, textBoxName.Text); // Parse parameters when you get up to it.
                     adminForm.ShowDialog();
-                    DisplayItems(listBoxRead, MasterFile);
+                    DisplayItems(listBoxRead);
                     statusLabel.Text = "List has been updated.";
                     listBoxFiltered.Items.Clear();
                 }
@@ -118,6 +118,7 @@ namespace MSSSStaffManagement
                 textBoxName.Focus();
                 textBoxName.Clear();
                 textBoxPhone.Clear();
+                textBoxName.ReadOnly = false;
                 toolTipGen.ToolTipTitle = "Filter Name";
                 ShowToolTip("Enter Name to search.", textBoxName, 20, 17);
             }
@@ -125,6 +126,7 @@ namespace MSSSStaffManagement
             {   // Sets focus to Phone Box.
                 textBoxPhone.Focus();
                 textBoxName.Clear();
+                textBoxPhone.ReadOnly = false;
                 toolTipGen.ToolTipTitle = "Filter Phone ID";
                 ShowToolTip("Enter Phone ID to search.", textBoxPhone, 20, 17);
             }
@@ -134,7 +136,7 @@ namespace MSSSStaffManagement
             }
             if (e.KeyCode == Keys.Right)
             {   // Move focus to listBoxFiltered first record.
-                
+                listBoxFiltered.SelectionMode = SelectionMode.One;
                 if (listBoxFiltered.Items.Count > 0)
                 {
                     listBoxFiltered.Focus();
@@ -154,8 +156,8 @@ namespace MSSSStaffManagement
         }
         private void GerneralForm_Load(object sender, EventArgs e)
         {
-            statusLabel.Text = ReadFile(path, MasterFile);
-            DisplayItems(listBoxRead, MasterFile);
+            statusLabel.Text = ReadFile(path);
+            DisplayItems(listBoxRead);
             textBoxPhone.Focus();
             toolTipGen.Show("Enter Phone ID to search.", textBoxPhone, 2000);
         }
@@ -174,10 +176,19 @@ namespace MSSSStaffManagement
                 }
             }
         }
-        #endregion
+        private void textBox_MouseClick(object sender, MouseEventArgs e)
+        {
+            (sender as TextBox).ReadOnly = true;
+        }
+        private void listBoxFiltered_MouseClick(object sender, MouseEventArgs e)
+        {
+            (sender as ListBox).SelectionMode = SelectionMode.None;
+        }
 
+        #endregion
 
 
 
     }
 }
+

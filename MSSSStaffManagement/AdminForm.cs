@@ -223,7 +223,7 @@ namespace MSSSStaffManagement
         }
         private void AdminForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            GeneralForm.SaveData(@"MalinStaffNamesV2.csv", GeneralForm.GetDictionary());
+            GeneralForm.SaveData(@"MalinStaffNamesV2.csv");
         }
         private void textBox_TextChanged(object sender, EventArgs e)
         {
@@ -244,9 +244,13 @@ namespace MSSSStaffManagement
         {
             textBoxPhoneAdmin.ReadOnly = true;
         }
+        private void textBox_MouseClick(object sender, MouseEventArgs e)
+        {
+            (sender as TextBox).ReadOnly = true;
+        }
+
+
+
         #endregion
-
-
-
     }
 }
