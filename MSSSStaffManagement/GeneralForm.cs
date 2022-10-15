@@ -25,8 +25,8 @@ namespace MSSSStaffManagement
         {
             InitializeComponent();
         }
-        public static SortedDictionary<string, string> MasterFile = new SortedDictionary<string, string>();
-        public static SortedDictionary<string, string> backupDict = MasterFile;
+        public static Dictionary<string, string> MasterFile = new Dictionary<string, string>();
+        public static Dictionary<string, string> backupDict = MasterFile;
         string path = @"MalinStaffNamesV2.csv";
 
         #region Global Methods
@@ -50,7 +50,7 @@ namespace MSSSStaffManagement
                  return "Values already exist within list.";
             }
         }
-        public static SortedDictionary<string, string> GetDictionary()
+        public static Dictionary<string, string> GetDictionary()
         {
             return MasterFile;
         }
@@ -70,7 +70,7 @@ namespace MSSSStaffManagement
                 Trace.TraceInformation("Error occurred during saving");
             }
         }
-        public static void SetDictionary(SortedDictionary<string, string> dict)
+        public static void SetDictionary(Dictionary<string, string> dict)
         {
             MasterFile = dict;
         }
