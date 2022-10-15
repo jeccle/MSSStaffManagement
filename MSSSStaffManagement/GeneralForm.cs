@@ -27,7 +27,7 @@ namespace MSSSStaffManagement
         }
         public static SortedDictionary<string, string> MasterFile = new SortedDictionary<string, string>();
         public static SortedDictionary<string, string> backupDict = MasterFile;
-        string path = @"MalinStaffNamesV2.csv";
+        string path = @"MalinStaffNamesV2Sorted.csv";
 
         #region Global Methods
         public static string ReadFile(string path)
