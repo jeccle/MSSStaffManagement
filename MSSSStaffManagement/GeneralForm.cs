@@ -34,6 +34,8 @@ namespace MSSSStaffManagement
         {
             try
             {
+                var sw = new Stopwatch();
+                sw.Start();
                 using (var reader = new StreamReader(File.Open(path, FileMode.Open), Encoding.UTF8, false))
                 {
                     Trace.TraceInformation("Loading from " + path);
@@ -42,12 +44,63 @@ namespace MSSSStaffManagement
                         string[] items = reader.ReadLine().Split(',');
                         MasterFile.Add(items[0], items[1]);
                     }
+                    sw.Stop();
+                    Trace.TraceInformation(sw.ElapsedTicks + " ticks | Dictionary ReadFile()");
                     return "Staff List Loaded.";
                 }
             }
             catch (ArgumentException)
             {
-                 return "Values already exist within list.";
+                return "Values already exist within list.";
+            }
+        }
+        public static string ReadFileStreamReader(string path)
+        {
+            try
+            {
+                string[] items;
+                var sw = new Stopwatch();
+                sw.Start();
+                using (StreamReader sr = File.OpenText(path))
+                {
+                    Trace.TraceInformation("Loading from " + path);
+                    while (!sr.EndOfStream)
+                    {
+                        items = sr.ReadLine().Split(',');
+                        MasterFile.Add(items[0], items[1]);
+                    }
+                }
+                sw.Stop();
+                Trace.TraceInformation(sw.ElapsedTicks + " ticks | Dictionary ReadFileStreamReader()");
+                return "Staff List Loaded.";
+            }
+            catch (ArgumentException)
+            {
+                return "Values already exist within list.";
+            }
+        }
+        public static string ReadFileReadAllLines(string path)
+        {
+            try
+            {
+                var sw = new Stopwatch();
+                sw.Start();
+                
+                    Trace.TraceInformation("Loading from " + path);
+                    var allLines = File.ReadLines(path);
+                    foreach (var line in allLines)
+                    {
+                        string[] items = line.Split(',');
+                        MasterFile.Add(items[0], items[1]);
+                    }
+                
+                sw.Stop();
+                Trace.TraceInformation(sw.ElapsedTicks + " ticks | Dictionary ReadFileReadAllLines()");
+                return "Staff List Loaded.";
+            }
+            catch (ArgumentException)
+            {
+                return "Values already exist within list.";
             }
         }
         public static Dictionary<string, string> GetDictionary()
@@ -58,11 +111,16 @@ namespace MSSSStaffManagement
         {
             try
             {
+                var sw = new Stopwatch();
+                Trace.TraceInformation("Stopwatch start.");
+                sw.Start();
                 using (StreamWriter writer = new StreamWriter(File.Open(path, FileMode.Open), Encoding.UTF8))
                 {
                     foreach (var item in MasterFile)
                         writer.WriteLine(item.Key + "," + item.Value);
                 }
+                sw.Stop();
+                Trace.TraceInformation(sw.ElapsedMilliseconds + "ms | Dictionary SaveData()");
                 Trace.TraceInformation("Saved to file. Path: " + path);
             }
             catch
@@ -131,7 +189,8 @@ namespace MSSSStaffManagement
                 ShowToolTip("Enter Phone ID to search.", textBoxPhone, 20, 17);
             }
             if (e.Alt && e.KeyCode == Keys.L)
-            {   // Save & Exit.
+            {   // Exit.
+                Trace.Flush();
                 Close();
             }
             if (e.KeyCode == Keys.Right)
@@ -152,14 +211,16 @@ namespace MSSSStaffManagement
                 DisplayTextBox(listBoxFiltered.SelectedItem.ToString());
                 listBoxFiltered.SetSelected(0, true);
             }
-            
+
         }
         private void GerneralForm_Load(object sender, EventArgs e)
-        {
-            statusLabel.Text = ReadFile(path);
+        {   // Change ReadFile method here.
+            Trace.Listeners.Add(new TextWriterTraceListener("TraceLog.txt", "myListener"));
+            statusLabel.Text = ReadFileReadAllLines(path);
             DisplayItems(listBoxRead);
             textBoxPhone.Focus();
             toolTipGen.Show("Enter Phone ID to search.", textBoxPhone, 2000);
+
         }
 
         private void textBox_TextChanged(object sender, EventArgs e)
@@ -185,8 +246,9 @@ namespace MSSSStaffManagement
             (sender as ListBox).SelectionMode = SelectionMode.None;
         }
 
-        #endregion
 
+
+        #endregion
 
 
     }
