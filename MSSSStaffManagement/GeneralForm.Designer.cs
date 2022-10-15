@@ -167,7 +167,6 @@
             this.KeyPreview = true;
             this.Name = "GeneralForm";
             this.Text = "Staff Management Form";
-            this.Activated += new System.EventHandler(this.GeneralForm_Activated);
             this.Load += new System.EventHandler(this.GerneralForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GerneralForm_KeyDown);
             this.groupBoxInput.ResumeLayout(false);
