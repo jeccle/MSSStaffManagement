@@ -105,8 +105,8 @@
             this.textBoxKeyBinds.Name = "textBoxKeyBinds";
             this.textBoxKeyBinds.Size = new System.Drawing.Size(156, 83);
             this.textBoxKeyBinds.TabIndex = 7;
-            this.textBoxKeyBinds.Text = "Alt+C » Navigate to Phone ID\r\nAlt+X » Navigate to Name\r\nAlt+A » Admin Form\r\nRight" +
-    " Arrow Key » Enter List\r\nEnter » Select ID from List\r\nAlt+G » Save & Exit";
+            this.textBoxKeyBinds.Text = "Alt+C » Navigate to Phone ID\r\nAlt+X » Navigate to Name\r\nAlt+A » Open Admin Form\r\n" +
+    "Right Arrow Key » Enter List\r\nEnter » Select ID from List\r\nAlt+G » Exit";
             // 
             // groupBoxInput
             // 
@@ -159,6 +159,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(571, 280);
+            this.ControlBox = false;
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.groupBoxInput);

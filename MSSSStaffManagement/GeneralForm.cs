@@ -9,7 +9,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+/*
+ *  Filter Keypress inputs.
+ *  Add tooltips to controls.
+ *  Remove mouse click functionality
+ *  Figure out how to stop admin form from focusing key binding textbox.
+ *  Format tab indexes
+ * 
+ */
 namespace MSSSStaffManagement
 {
     public partial class GeneralForm : Form

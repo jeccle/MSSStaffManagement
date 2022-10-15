@@ -53,7 +53,8 @@
             this.textBoxKeyBinds.Name = "textBoxKeyBinds";
             this.textBoxKeyBinds.ReadOnly = true;
             this.textBoxKeyBinds.Size = new System.Drawing.Size(180, 109);
-            this.textBoxKeyBinds.TabIndex = 0;
+            this.textBoxKeyBinds.TabIndex = 10;
+            this.textBoxKeyBinds.TabStop = false;
             this.textBoxKeyBinds.Text = "Alt+C » Navigate to Phone ID\r\nAlt+X » Navigate to Name\r\nAlt+F » Create New Staff " +
     "ID\r\nAlt+V » Update Name\r\nAlt+S » Delete ID\r\nAlt+T » Rollback Staff List\r\nAlt+G »" +
     " Exit\r\nEnter » Confirm Changes";
@@ -113,7 +114,7 @@
             this.textBoxNameAdmin.Location = new System.Drawing.Point(69, 54);
             this.textBoxNameAdmin.Name = "textBoxNameAdmin";
             this.textBoxNameAdmin.Size = new System.Drawing.Size(148, 20);
-            this.textBoxNameAdmin.TabIndex = 1;
+            this.textBoxNameAdmin.TabIndex = 0;
             this.textBoxNameAdmin.TextChanged += new System.EventHandler(this.textBox_TextChanged);
             // 
             // textBoxPhoneAdmin
@@ -121,7 +122,7 @@
             this.textBoxPhoneAdmin.Location = new System.Drawing.Point(69, 28);
             this.textBoxPhoneAdmin.Name = "textBoxPhoneAdmin";
             this.textBoxPhoneAdmin.Size = new System.Drawing.Size(148, 20);
-            this.textBoxPhoneAdmin.TabIndex = 0;
+            this.textBoxPhoneAdmin.TabIndex = 1;
             this.textBoxPhoneAdmin.TextChanged += new System.EventHandler(this.textBox_TextChanged);
             // 
             // statusStrip
@@ -152,6 +153,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(255, 298);
+            this.ControlBox = false;
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
