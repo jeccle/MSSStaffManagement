@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.components = new System.ComponentModel.Container();
+            this.textBoxKeyBinds = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -36,25 +37,33 @@
             this.textBoxUpdatedDetail = new System.Windows.Forms.TextBox();
             this.textBoxNameAdmin = new System.Windows.Forms.TextBox();
             this.textBoxPhoneAdmin = new System.Windows.Forms.TextBox();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolTipAdmin = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
-            // textBox1
+            // textBoxKeyBinds
             // 
-            this.textBox1.Location = new System.Drawing.Point(6, 16);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(220, 53);
-            this.textBox1.TabIndex = 0;
+            this.textBoxKeyBinds.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxKeyBinds.Location = new System.Drawing.Point(27, 16);
+            this.textBoxKeyBinds.Multiline = true;
+            this.textBoxKeyBinds.Name = "textBoxKeyBinds";
+            this.textBoxKeyBinds.ReadOnly = true;
+            this.textBoxKeyBinds.Size = new System.Drawing.Size(180, 109);
+            this.textBoxKeyBinds.TabIndex = 0;
+            this.textBoxKeyBinds.Text = "Alt+C » Navigate to Phone ID\r\nAlt+X » Navigate to Name\r\nAlt+F » Create New Staff " +
+    "ID\r\nAlt+V » Update Name\r\nAlt+S » Delete ID\r\nAlt+T » Rollback Staff List\r\nAlt+G »" +
+    " Exit\r\nEnter » Confirm Changes";
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Location = new System.Drawing.Point(13, 154);
+            this.groupBox1.Controls.Add(this.textBoxKeyBinds);
+            this.groupBox1.Location = new System.Drawing.Point(11, 142);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(232, 78);
+            this.groupBox1.Size = new System.Drawing.Size(232, 131);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Key Bindings";
@@ -66,9 +75,9 @@
             this.groupBox2.Controls.Add(this.textBoxUpdatedDetail);
             this.groupBox2.Controls.Add(this.textBoxNameAdmin);
             this.groupBox2.Controls.Add(this.textBoxPhoneAdmin);
-            this.groupBox2.Location = new System.Drawing.Point(13, 13);
+            this.groupBox2.Location = new System.Drawing.Point(11, 13);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(232, 135);
+            this.groupBox2.Size = new System.Drawing.Size(232, 123);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Create/Alter/Delete Staff ID";
@@ -93,8 +102,9 @@
             // 
             // textBoxUpdatedDetail
             // 
-            this.textBoxUpdatedDetail.Location = new System.Drawing.Point(18, 99);
+            this.textBoxUpdatedDetail.Location = new System.Drawing.Point(18, 88);
             this.textBoxUpdatedDetail.Name = "textBoxUpdatedDetail";
+            this.textBoxUpdatedDetail.ReadOnly = true;
             this.textBoxUpdatedDetail.Size = new System.Drawing.Size(199, 20);
             this.textBoxUpdatedDetail.TabIndex = 2;
             // 
@@ -104,6 +114,7 @@
             this.textBoxNameAdmin.Name = "textBoxNameAdmin";
             this.textBoxNameAdmin.Size = new System.Drawing.Size(148, 20);
             this.textBoxNameAdmin.TabIndex = 1;
+            this.textBoxNameAdmin.TextChanged += new System.EventHandler(this.textBox_TextChanged);
             // 
             // textBoxPhoneAdmin
             // 
@@ -111,27 +122,58 @@
             this.textBoxPhoneAdmin.Name = "textBoxPhoneAdmin";
             this.textBoxPhoneAdmin.Size = new System.Drawing.Size(148, 20);
             this.textBoxPhoneAdmin.TabIndex = 0;
+            this.textBoxPhoneAdmin.TextChanged += new System.EventHandler(this.textBox_TextChanged);
+            // 
+            // statusStrip
+            // 
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusLabel});
+            this.statusStrip.Location = new System.Drawing.Point(0, 276);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(255, 22);
+            this.statusStrip.TabIndex = 3;
+            this.statusStrip.Text = "statusStrip1";
+            // 
+            // statusLabel
+            // 
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(0, 17);
+            // 
+            // toolTipAdmin
+            // 
+            this.toolTipAdmin.AutoPopDelay = 5000;
+            this.toolTipAdmin.InitialDelay = 500;
+            this.toolTipAdmin.IsBalloon = true;
+            this.toolTipAdmin.ReshowDelay = 3000;
+            this.toolTipAdmin.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             // 
             // AdminForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(255, 244);
+            this.ClientSize = new System.Drawing.Size(255, 298);
+            this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.KeyPreview = true;
             this.Name = "AdminForm";
             this.Text = "AdminForm";
+            this.Load += new System.EventHandler(this.AdminForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AdminForm_KeyDown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxKeyBinds;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label2;
@@ -139,5 +181,8 @@
         private System.Windows.Forms.TextBox textBoxUpdatedDetail;
         private System.Windows.Forms.TextBox textBoxNameAdmin;
         private System.Windows.Forms.TextBox textBoxPhoneAdmin;
+        private System.Windows.Forms.StatusStrip statusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel statusLabel;
+        private System.Windows.Forms.ToolTip toolTipAdmin;
     }
 }
