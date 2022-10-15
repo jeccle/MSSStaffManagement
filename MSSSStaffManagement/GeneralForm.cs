@@ -54,22 +54,29 @@ namespace MSSSStaffManagement
         {
             return MasterFile;
         }
+        public static void SaveData(string path, Dictionary<string, string> keyValues)
+        {
+            try
+            {
+                using (StreamWriter writer = new StreamWriter(File.Open(path, FileMode.Open), Encoding.UTF8))
+                {
+                    foreach (var item in keyValues)
+                        writer.WriteLine(item.Key + "," + item.Value);
+                }
+                Trace.TraceInformation("Saved to file. Path: " + path);
+            }
+            catch
+            {
+                Trace.TraceInformation("Error occurred during saving");
+            }
+        }
         public static void SetDictionary(Dictionary<string, string> dict)
         {
             MasterFile = dict;
         }
         #endregion
 
-        #region Utility Methods
-        private void SaveData(string path, Dictionary<string, string> keyValues)
-        {
-            using (StreamWriter writer = new StreamWriter(File.Open(path, FileMode.Open), Encoding.UTF8))
-            {
-                foreach (var item in keyValues)
-                    writer.WriteLine(item.Key + "," + item.Value);
-            }
-            Trace.TraceInformation("Saved to file. Path: " + path);
-        }
+        #region Utility Methods     
         private void DisplayTextBox(string item)
         {
             string[] kvp = item.Split(new char[] { ' ' }, 2);
@@ -85,7 +92,11 @@ namespace MSSSStaffManagement
                 listBox.Items.Add(item.Key + " " + item.Value);
             }
         }
-
+        public void ShowToolTip(string message, Control control, int x, int y)
+        {
+            toolTipGen.Show(message, control, x, y, 5000);
+            toolTipGen.Show(message, control, x, y, 5000);
+        }
         #endregion
 
         #region Form Event/Controls
@@ -96,8 +107,10 @@ namespace MSSSStaffManagement
                 if (!string.IsNullOrEmpty(listBoxFiltered.SelectedIndex.ToString()))
                 {
                     AdminForm adminForm = new AdminForm(textBoxPhone.Text, textBoxName.Text); // Parse parameters when you get up to it.
-                    adminForm.FormClosed += AdminForm_Closed;
                     adminForm.ShowDialog();
+                    DisplayItems(listBoxRead, MasterFile);
+                    statusLabel.Text = "List has been updated.";
+                    listBoxFiltered.Items.Clear();
                 }
             }
             if (e.Alt && e.KeyCode == Keys.X)
@@ -105,19 +118,19 @@ namespace MSSSStaffManagement
                 textBoxName.Focus();
                 textBoxName.Clear();
                 textBoxPhone.Clear();
-                toolTipGen.Show("Enter Name to search.", textBoxName, 10, -75, 5000);
+                toolTipGen.ToolTipTitle = "Filter Name";
+                ShowToolTip("Enter Name to search.", textBoxName, 20, 17);
             }
             if (e.Alt && e.KeyCode == Keys.C)
             {   // Sets focus to Phone Box.
                 textBoxPhone.Focus();
-                textBoxPhone.Clear();
                 textBoxName.Clear();
-                toolTipGen.Show("Enter Phone ID to search.", textBoxPhone, 10, -75, 5000);
+                toolTipGen.ToolTipTitle = "Filter Phone ID";
+                ShowToolTip("Enter Phone ID to search.", textBoxPhone, 20, 17);
             }
-            if (e.Alt && e.KeyCode == Keys.G)
+            if (e.Alt && e.KeyCode == Keys.L)
             {   // Save & Exit.
-                
-                this.Close();
+                Close();
             }
             if (e.KeyCode == Keys.Right)
             {   // Move focus to listBoxFiltered first record.
@@ -146,13 +159,7 @@ namespace MSSSStaffManagement
             textBoxPhone.Focus();
             toolTipGen.Show("Enter Phone ID to search.", textBoxPhone, 2000);
         }
-        private void AdminForm_Closed(object sender, FormClosedEventArgs e)
-        {
-            DisplayItems(listBoxRead, MasterFile);
-            statusLabel.Text = "List has been updated.";
-            listBoxFiltered.Items.Clear();
-            SaveData(path, MasterFile);
-        }
+
         private void textBox_TextChanged(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty((sender as TextBox).Text))

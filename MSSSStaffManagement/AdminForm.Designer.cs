@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.textBoxKeyBinds = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBoxKeyBinds = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -40,7 +40,7 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTipAdmin = new System.Windows.Forms.ToolTip(this.components);
-            this.groupBox1.SuspendLayout();
+            this.groupBoxKeyBinds.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -56,18 +56,18 @@
             this.textBoxKeyBinds.TabIndex = 10;
             this.textBoxKeyBinds.TabStop = false;
             this.textBoxKeyBinds.Text = "Alt+C » Navigate to Phone ID\r\nAlt+X » Navigate to Name\r\nAlt+F » Create New Staff " +
-    "ID\r\nAlt+V » Update Name\r\nAlt+S » Delete ID\r\nAlt+T » Rollback Staff List\r\nAlt+G »" +
+    "ID\r\nAlt+V » Update Name\r\nAlt+S » Delete ID\r\nAlt+T » Rollback Staff List\r\nAlt+L »" +
     " Exit\r\nEnter » Confirm Changes";
             // 
-            // groupBox1
+            // groupBoxKeyBinds
             // 
-            this.groupBox1.Controls.Add(this.textBoxKeyBinds);
-            this.groupBox1.Location = new System.Drawing.Point(11, 142);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(232, 131);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Key Bindings";
+            this.groupBoxKeyBinds.Controls.Add(this.textBoxKeyBinds);
+            this.groupBoxKeyBinds.Location = new System.Drawing.Point(11, 142);
+            this.groupBoxKeyBinds.Name = "groupBoxKeyBinds";
+            this.groupBoxKeyBinds.Size = new System.Drawing.Size(232, 131);
+            this.groupBoxKeyBinds.TabIndex = 1;
+            this.groupBoxKeyBinds.TabStop = false;
+            this.groupBoxKeyBinds.Text = "Key Bindings";
             // 
             // groupBox2
             // 
@@ -121,9 +121,11 @@
             // 
             this.textBoxPhoneAdmin.Location = new System.Drawing.Point(69, 28);
             this.textBoxPhoneAdmin.Name = "textBoxPhoneAdmin";
+            this.textBoxPhoneAdmin.ReadOnly = true;
             this.textBoxPhoneAdmin.Size = new System.Drawing.Size(148, 20);
             this.textBoxPhoneAdmin.TabIndex = 1;
             this.textBoxPhoneAdmin.TextChanged += new System.EventHandler(this.textBox_TextChanged);
+            this.textBoxPhoneAdmin.Leave += new System.EventHandler(this.textBoxPhoneAdmin_Leave);
             // 
             // statusStrip
             // 
@@ -156,14 +158,15 @@
             this.ControlBox = false;
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.groupBoxKeyBinds);
             this.KeyPreview = true;
             this.Name = "AdminForm";
             this.Text = "AdminForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AdminForm_FormClosing);
             this.Load += new System.EventHandler(this.AdminForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AdminForm_KeyDown);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.groupBoxKeyBinds.ResumeLayout(false);
+            this.groupBoxKeyBinds.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.statusStrip.ResumeLayout(false);
@@ -176,7 +179,7 @@
         #endregion
 
         private System.Windows.Forms.TextBox textBoxKeyBinds;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBoxKeyBinds;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;

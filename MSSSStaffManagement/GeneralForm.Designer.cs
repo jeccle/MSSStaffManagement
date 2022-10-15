@@ -106,7 +106,7 @@
             this.textBoxKeyBinds.Size = new System.Drawing.Size(156, 83);
             this.textBoxKeyBinds.TabIndex = 7;
             this.textBoxKeyBinds.Text = "Alt+C » Navigate to Phone ID\r\nAlt+X » Navigate to Name\r\nAlt+A » Open Admin Form\r\n" +
-    "Right Arrow Key » Enter List\r\nEnter » Select ID from List\r\nAlt+G » Exit";
+    "Right Arrow Key » Enter List\r\nEnter » Select ID from List\r\nAlt+L » Exit";
             // 
             // groupBoxInput
             // 
