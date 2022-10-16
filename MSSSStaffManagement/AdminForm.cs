@@ -245,10 +245,7 @@ namespace MSSSStaffManagement
         {
             textBoxPhoneAdmin.Enabled = false;
         }
-        private void textBox_MouseClick(object sender, MouseEventArgs e)
-        {
-            (sender as TextBox).ReadOnly = true;
-        }
+
 
 
 
