@@ -59,7 +59,6 @@
             this.textBoxKeyBinds.TabIndex = 10;
             this.textBoxKeyBinds.TabStop = false;
             this.textBoxKeyBinds.Text = resources.GetString("textBoxKeyBinds.Text");
-            this.textBoxKeyBinds.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox_MouseClick);
             // 
             // groupBoxKeyBinds
             // 
