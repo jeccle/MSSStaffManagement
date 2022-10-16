@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminForm));
             this.textBoxKeyBinds = new System.Windows.Forms.TextBox();
             this.groupBoxKeyBinds = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -48,16 +49,16 @@
             // textBoxKeyBinds
             // 
             this.textBoxKeyBinds.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxKeyBinds.Location = new System.Drawing.Point(27, 16);
+            this.textBoxKeyBinds.Enabled = false;
+            this.textBoxKeyBinds.Font = new System.Drawing.Font("Lato", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxKeyBinds.Location = new System.Drawing.Point(44, 18);
             this.textBoxKeyBinds.Multiline = true;
             this.textBoxKeyBinds.Name = "textBoxKeyBinds";
             this.textBoxKeyBinds.ReadOnly = true;
-            this.textBoxKeyBinds.Size = new System.Drawing.Size(180, 109);
+            this.textBoxKeyBinds.Size = new System.Drawing.Size(159, 115);
             this.textBoxKeyBinds.TabIndex = 10;
             this.textBoxKeyBinds.TabStop = false;
-            this.textBoxKeyBinds.Text = "Alt+C » Navigate to Phone ID\r\nAlt+X » Navigate to Name\r\nAlt+F » Create New Staff " +
-    "ID\r\nAlt+V » Update Name\r\nAlt+S » Delete ID\r\nAlt+T » Rollback Staff List\r\nAlt+L »" +
-    " Exit\r\nEnter » Confirm Changes";
+            this.textBoxKeyBinds.Text = resources.GetString("textBoxKeyBinds.Text");
             this.textBoxKeyBinds.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox_MouseClick);
             // 
             // groupBoxKeyBinds
@@ -65,7 +66,7 @@
             this.groupBoxKeyBinds.Controls.Add(this.textBoxKeyBinds);
             this.groupBoxKeyBinds.Location = new System.Drawing.Point(11, 142);
             this.groupBoxKeyBinds.Name = "groupBoxKeyBinds";
-            this.groupBoxKeyBinds.Size = new System.Drawing.Size(232, 131);
+            this.groupBoxKeyBinds.Size = new System.Drawing.Size(232, 137);
             this.groupBoxKeyBinds.TabIndex = 1;
             this.groupBoxKeyBinds.TabStop = false;
             this.groupBoxKeyBinds.Text = "Key Bindings";
@@ -112,6 +113,7 @@
             // 
             // textBoxNameAdmin
             // 
+            this.textBoxNameAdmin.Enabled = false;
             this.textBoxNameAdmin.Location = new System.Drawing.Point(69, 54);
             this.textBoxNameAdmin.Name = "textBoxNameAdmin";
             this.textBoxNameAdmin.Size = new System.Drawing.Size(148, 20);
@@ -121,6 +123,7 @@
             // 
             // textBoxPhoneAdmin
             // 
+            this.textBoxPhoneAdmin.Enabled = false;
             this.textBoxPhoneAdmin.Location = new System.Drawing.Point(69, 28);
             this.textBoxPhoneAdmin.Name = "textBoxPhoneAdmin";
             this.textBoxPhoneAdmin.ReadOnly = true;
@@ -134,7 +137,7 @@
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 276);
+            this.statusStrip.Location = new System.Drawing.Point(0, 282);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Size = new System.Drawing.Size(255, 22);
             this.statusStrip.TabIndex = 3;
@@ -157,7 +160,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(255, 298);
+            this.ClientSize = new System.Drawing.Size(255, 304);
             this.ControlBox = false;
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.groupBox2);

@@ -25,8 +25,8 @@ namespace MSSSStaffManagement
         {
             InitializeComponent();
         }
-        public static SortedDictionary<string, string> MasterFile = new SortedDictionary<string, string>();
-        public static SortedDictionary<string, string> backupDict = MasterFile;
+        public static Dictionary<string, string> MasterFile = new Dictionary<string, string>();
+        public static Dictionary<string, string> backupDict = MasterFile;
         string path = @"MalinStaffNamesV2.csv";
 
         #region Global Methods
@@ -34,6 +34,8 @@ namespace MSSSStaffManagement
         {
             try
             {
+                var sw = new Stopwatch();
+                sw.Start();
                 using (var reader = new StreamReader(File.Open(path, FileMode.Open), Encoding.UTF8, false))
                 {
                     Trace.TraceInformation("Loading from " + path);
@@ -42,15 +44,17 @@ namespace MSSSStaffManagement
                         string[] items = reader.ReadLine().Split(',');
                         MasterFile.Add(items[0], items[1]);
                     }
+                    sw.Stop();
+                    Trace.TraceInformation(sw.ElapsedTicks + " ticks | Dictionary ReadFile()");
                     return "Staff List Loaded.";
                 }
             }
             catch (ArgumentException)
             {
-                 return "Values already exist within list.";
+                return "Values already exist within list.";
             }
         }
-        public static SortedDictionary<string, string> GetDictionary()
+        public static Dictionary<string, string> GetDictionary()
         {
             return MasterFile;
         }
@@ -58,11 +62,16 @@ namespace MSSSStaffManagement
         {
             try
             {
+                var sw = new Stopwatch();
+                Trace.TraceInformation("Stopwatch start.");
+                sw.Start();
                 using (StreamWriter writer = new StreamWriter(File.Open(path, FileMode.Open), Encoding.UTF8))
                 {
                     foreach (var item in MasterFile)
                         writer.WriteLine(item.Key + "," + item.Value);
                 }
+                sw.Stop();
+                Trace.TraceInformation(sw.ElapsedMilliseconds + "ms | Dictionary SaveData()");
                 Trace.TraceInformation("Saved to file. Path: " + path);
             }
             catch
@@ -70,7 +79,7 @@ namespace MSSSStaffManagement
                 Trace.TraceInformation("Error occurred during saving");
             }
         }
-        public static void SetDictionary(SortedDictionary<string, string> dict)
+        public static void SetDictionary(Dictionary<string, string> dict)
         {
             MasterFile = dict;
         }
@@ -97,6 +106,14 @@ namespace MSSSStaffManagement
             toolTipGen.Show(message, control, x, y, 5000);
             toolTipGen.Show(message, control, x, y, 5000);
         }
+        private void FocusTextBox(TextBox textBox)
+        {
+            textBox.ReadOnly = false;
+            textBox.Enabled = true;
+            textBox.Focus();
+
+        }
+        
         #endregion
 
         #region Form Event/Controls
@@ -115,23 +132,22 @@ namespace MSSSStaffManagement
             }
             if (e.Alt && e.KeyCode == Keys.X)
             {   // Sets focus to Name Box.
-                textBoxName.Focus();
-                textBoxName.Clear();
                 textBoxPhone.Clear();
-                textBoxName.ReadOnly = false;
+                textBoxName.Clear();
+                FocusTextBox(textBoxName);    
                 toolTipGen.ToolTipTitle = "Filter Name";
                 ShowToolTip("Enter Name to search.", textBoxName, 20, 17);
             }
             if (e.Alt && e.KeyCode == Keys.C)
             {   // Sets focus to Phone Box.
-                textBoxPhone.Focus();
                 textBoxName.Clear();
-                textBoxPhone.ReadOnly = false;
+                FocusTextBox(textBoxPhone);
                 toolTipGen.ToolTipTitle = "Filter Phone ID";
                 ShowToolTip("Enter Phone ID to search.", textBoxPhone, 20, 17);
             }
             if (e.Alt && e.KeyCode == Keys.L)
-            {   // Save & Exit.
+            {   // Exit.
+                Trace.Flush();
                 Close();
             }
             if (e.KeyCode == Keys.Right)
@@ -152,16 +168,17 @@ namespace MSSSStaffManagement
                 DisplayTextBox(listBoxFiltered.SelectedItem.ToString());
                 listBoxFiltered.SetSelected(0, true);
             }
-            
+
         }
         private void GerneralForm_Load(object sender, EventArgs e)
-        {
-            statusLabel.Text = ReadFile(path);
+        {   // Change ReadFile method here.
+            Trace.Listeners.Add(new TextWriterTraceListener("TraceLog.txt", "myListener"));
+            statusLabel.Text = ReadFileReadAllLines(path);
             DisplayItems(listBoxRead);
             textBoxPhone.Focus();
             toolTipGen.Show("Enter Phone ID to search.", textBoxPhone, 2000);
-        }
 
+        }
         private void textBox_TextChanged(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty((sender as TextBox).Text))
@@ -176,14 +193,16 @@ namespace MSSSStaffManagement
                 }
             }
         }
-        private void textBox_MouseClick(object sender, MouseEventArgs e)
-        {
-            (sender as TextBox).ReadOnly = true;
-        }
         private void listBoxFiltered_MouseClick(object sender, MouseEventArgs e)
         {
             (sender as ListBox).SelectionMode = SelectionMode.None;
         }
+        private void textBox_Leave(object sender, EventArgs e)
+        {
+            (sender as TextBox).Enabled = false;
+        }
+
+
 
         #endregion
 

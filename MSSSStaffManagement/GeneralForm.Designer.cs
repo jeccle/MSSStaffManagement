@@ -67,21 +67,23 @@
             // 
             // textBoxPhone
             // 
+            this.textBoxPhone.Enabled = false;
             this.textBoxPhone.Location = new System.Drawing.Point(61, 25);
             this.textBoxPhone.Name = "textBoxPhone";
             this.textBoxPhone.Size = new System.Drawing.Size(102, 20);
             this.textBoxPhone.TabIndex = 2;
-            this.textBoxPhone.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox_MouseClick);
             this.textBoxPhone.TextChanged += new System.EventHandler(this.textBox_TextChanged);
+            this.textBoxPhone.Leave += new System.EventHandler(this.textBox_Leave);
             // 
             // textBoxName
             // 
+            this.textBoxName.Enabled = false;
             this.textBoxName.Location = new System.Drawing.Point(61, 62);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(102, 20);
             this.textBoxName.TabIndex = 3;
-            this.textBoxName.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox_MouseClick);
             this.textBoxName.TextChanged += new System.EventHandler(this.textBox_TextChanged);
+            this.textBoxName.Leave += new System.EventHandler(this.textBox_Leave);
             // 
             // labelPhone
             // 
@@ -104,13 +106,16 @@
             // textBoxKeyBinds
             // 
             this.textBoxKeyBinds.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxKeyBinds.Enabled = false;
+            this.textBoxKeyBinds.Font = new System.Drawing.Font("Lato", 8.25F);
             this.textBoxKeyBinds.Location = new System.Drawing.Point(13, 19);
             this.textBoxKeyBinds.Multiline = true;
             this.textBoxKeyBinds.Name = "textBoxKeyBinds";
             this.textBoxKeyBinds.Size = new System.Drawing.Size(156, 83);
             this.textBoxKeyBinds.TabIndex = 7;
-            this.textBoxKeyBinds.Text = "Alt+C » Navigate to Phone ID\r\nAlt+X » Navigate to Name\r\nAlt+A » Open Admin Form\r\n" +
-    "Right Arrow Key » Enter List\r\nEnter » Select ID from List\r\nAlt+L » Exit";
+            this.textBoxKeyBinds.Text = "Alt+C  »     Navigate to Phone ID\r\nAlt+X  »     Navigate to Name\r\nAlt+A  »     Op" +
+    "en Admin Form\r\n→           »     Enter List\r\nEnter   »     Select ID in List\r\nAl" +
+    "t+L   »    Exit";
             // 
             // groupBoxInput
             // 
@@ -131,7 +136,7 @@
             this.statusLabel});
             this.statusStrip.Location = new System.Drawing.Point(0, 258);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(571, 22);
+            this.statusStrip.Size = new System.Drawing.Size(570, 22);
             this.statusStrip.TabIndex = 9;
             // 
             // statusLabel
@@ -162,7 +167,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(571, 280);
+            this.ClientSize = new System.Drawing.Size(570, 280);
             this.ControlBox = false;
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.statusStrip);
