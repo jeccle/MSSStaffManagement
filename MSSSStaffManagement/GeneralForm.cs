@@ -54,6 +54,55 @@ namespace MSSSStaffManagement
                 return "Values already exist within list.";
             }
         }
+        public static string ReadFileStreamReader(string path)
+        {
+            try
+            {
+                string[] items;
+                var sw = new Stopwatch();
+                sw.Start();
+                using (StreamReader sr = File.OpenText(path))
+                {
+                    Trace.TraceInformation("Loading from " + path);
+                    while (!sr.EndOfStream)
+                    {
+                        items = sr.ReadLine().Split(',');
+                        MasterFile.Add(items[0], items[1]);
+                    }
+                }
+                sw.Stop();
+                Trace.TraceInformation(sw.ElapsedTicks + " ticks | Dictionary ReadFileStreamReader()");
+                return "Staff List Loaded.";
+            }
+            catch (ArgumentException)
+            {
+                return "Values already exist within list.";
+            }
+        }
+        public static string ReadFileReadAllLines(string path)
+        {
+            try
+            {
+                var sw = new Stopwatch();
+                sw.Start();
+
+                Trace.TraceInformation("Loading from " + path);
+                var allLines = File.ReadLines(path);
+                foreach (var line in allLines)
+                {
+                    string[] items = line.Split(',');
+                    MasterFile.Add(items[0], items[1]);
+                }
+
+                sw.Stop();
+                Trace.TraceInformation(sw.ElapsedTicks + " ticks | Dictionary ReadFileReadAllLines()");
+                return "Staff List Loaded.";
+            }
+            catch (ArgumentException)
+            {
+                return "Values already exist within list.";
+            }
+        }
         public static Dictionary<string, string> GetDictionary()
         {
             return MasterFile;
