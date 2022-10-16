@@ -103,8 +103,8 @@ namespace MSSSStaffManagement
         }
         public void ShowToolTip(string message, Control control, int x, int y)
         {
-            toolTipGen.Show(message, control, x, y, 5000);
-            toolTipGen.Show(message, control, x, y, 5000);
+            toolTipGen.Show(message, control, x, y, 3500);
+            toolTipGen.Show(message, control, x, y, 3500);
         }
         private void FocusTextBox(TextBox textBox)
         {
@@ -173,7 +173,7 @@ namespace MSSSStaffManagement
         private void GerneralForm_Load(object sender, EventArgs e)
         {   // Change ReadFile method here.
             Trace.Listeners.Add(new TextWriterTraceListener("TraceLog.txt", "myListener"));
-            statusLabel.Text = ReadFileReadAllLines(path);
+            statusLabel.Text = ReadFile(path);
             DisplayItems(listBoxRead);
             textBoxPhone.Focus();
             toolTipGen.Show("Enter Phone ID to search.", textBoxPhone, 2000);

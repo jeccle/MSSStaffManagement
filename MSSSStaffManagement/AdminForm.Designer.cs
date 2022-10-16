@@ -105,6 +105,8 @@
             // 
             // textBoxUpdatedDetail
             // 
+            this.textBoxUpdatedDetail.Enabled = false;
+            this.textBoxUpdatedDetail.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxUpdatedDetail.Location = new System.Drawing.Point(18, 88);
             this.textBoxUpdatedDetail.Name = "textBoxUpdatedDetail";
             this.textBoxUpdatedDetail.ReadOnly = true;
@@ -120,6 +122,7 @@
             this.textBoxNameAdmin.TabIndex = 0;
             this.textBoxNameAdmin.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox_MouseClick);
             this.textBoxNameAdmin.TextChanged += new System.EventHandler(this.textBox_TextChanged);
+            this.textBoxNameAdmin.Leave += new System.EventHandler(this.textBox_Leave);
             // 
             // textBoxPhoneAdmin
             // 
@@ -131,7 +134,7 @@
             this.textBoxPhoneAdmin.TabIndex = 1;
             this.textBoxPhoneAdmin.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox_MouseClick);
             this.textBoxPhoneAdmin.TextChanged += new System.EventHandler(this.textBox_TextChanged);
-            this.textBoxPhoneAdmin.Leave += new System.EventHandler(this.textBoxPhoneAdmin_Leave);
+            this.textBoxPhoneAdmin.Leave += new System.EventHandler(this.textBox_Leave);
             // 
             // statusStrip
             // 

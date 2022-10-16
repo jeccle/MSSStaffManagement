@@ -169,8 +169,8 @@ namespace MSSSStaffManagement
         }
         public void ShowToolTip(string message, Control control, int x, int y)
         {
-            toolTipAdmin.Show(message, control, x, y, 5000);
-            toolTipAdmin.Show(message, control, x, y, 5000);
+            toolTipAdmin.Show(message, control, x, y, 3500);
+            toolTipAdmin.Show(message, control, x, y, 3500);
         }
         private void MissingID()
         {
@@ -186,11 +186,12 @@ namespace MSSSStaffManagement
             confirmed = false;
             if (e.Alt && e.KeyCode == Keys.X)
             {   // Sets focus to Name Box.
+                textBoxNameAdmin.Enabled = true;
                 textBoxNameAdmin.Focus();
             }
             if (e.Alt && e.KeyCode == Keys.C)
             {   // Sets focus to Phone ID Box.
-                textBoxPhoneAdmin.ReadOnly = false;
+                textBoxPhoneAdmin.Enabled = true;
                 textBoxPhoneAdmin.Focus();
             }
             if (e.Alt && e.KeyCode == Keys.F)
@@ -240,9 +241,9 @@ namespace MSSSStaffManagement
             }
             textBoxUpdatedDetail.Text = textBoxPhoneAdmin.Text + " " + textBoxNameAdmin.Text;
         }
-        private void textBoxPhoneAdmin_Leave(object sender, EventArgs e)
+        private void textBox_Leave(object sender, EventArgs e)
         {
-            textBoxPhoneAdmin.ReadOnly = true;
+            textBoxPhoneAdmin.Enabled = false;
         }
         private void textBox_MouseClick(object sender, MouseEventArgs e)
         {
