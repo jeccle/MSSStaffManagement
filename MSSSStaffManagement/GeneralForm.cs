@@ -72,7 +72,7 @@ namespace MSSSStaffManagement
                 }
                 sw.Stop();
                 Trace.TraceInformation(sw.ElapsedMilliseconds + "ms | Dictionary SaveData()");
-                Trace.TraceInformation("Saved to file. Path: " + path);
+                Trace.TraceInformation("Saved to file. Path: " + path + "\n");
             }
             catch
             {
