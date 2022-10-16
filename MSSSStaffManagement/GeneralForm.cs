@@ -34,18 +34,15 @@ namespace MSSSStaffManagement
         {
             try
             {
-                var sw = new Stopwatch();
-                sw.Start();
+                var sw = Stopwatch.StartNew();
                 using (var reader = new StreamReader(File.Open(path, FileMode.Open), Encoding.UTF8, false))
-                {
-                    Trace.TraceInformation("Loading from " + path);
+                {                                                                       Trace.TraceInformation("Loading from " + path);
                     while (!reader.EndOfStream)
                     {
                         string[] items = reader.ReadLine().Split(',');
                         MasterFile.Add(items[0], items[1]);
                     }
-                    sw.Stop();
-                    Trace.TraceInformation(sw.ElapsedTicks + " ticks | Dictionary ReadFile()");
+                    sw.Stop();                                                          Trace.TraceInformation(sw.ElapsedTicks + " ticks | Dictionary ReadFile()");
                     return "Staff List Loaded.";
                 }
             }
@@ -59,19 +56,16 @@ namespace MSSSStaffManagement
             try
             {
                 string[] items;
-                var sw = new Stopwatch();
-                sw.Start();
+                var sw = Stopwatch.StartNew();
                 using (StreamReader sr = File.OpenText(path))
-                {
-                    Trace.TraceInformation("Loading from " + path);
+                {                                                                       Trace.TraceInformation("Loading from " + path);
                     while (!sr.EndOfStream)
                     {
                         items = sr.ReadLine().Split(',');
                         MasterFile.Add(items[0], items[1]);
                     }
                 }
-                sw.Stop();
-                Trace.TraceInformation(sw.ElapsedTicks + " ticks | Dictionary ReadFileStreamReader()");
+                sw.Stop();                                                              Trace.TraceInformation(sw.ElapsedTicks + " ticks | Dictionary ReadFileStreamReader()");
                 return "Staff List Loaded.";
             }
             catch (ArgumentException)
@@ -82,20 +76,15 @@ namespace MSSSStaffManagement
         public static string ReadFileReadAllLines(string path)
         {
             try
-            {
-                var sw = new Stopwatch();
-                sw.Start();
-
-                Trace.TraceInformation("Loading from " + path);
+            {                                                                           Trace.TraceInformation("Loading from " + path);
+                var sw = Stopwatch.StartNew();
                 var allLines = File.ReadLines(path);
                 foreach (var line in allLines)
                 {
                     string[] items = line.Split(',');
                     MasterFile.Add(items[0], items[1]);
                 }
-
-                sw.Stop();
-                Trace.TraceInformation(sw.ElapsedTicks + " ticks | Dictionary ReadFileReadAllLines()");
+                sw.Stop();                                                              Trace.TraceInformation(sw.ElapsedTicks + " ticks | Dictionary ReadFileReadAllLines()");
                 return "Staff List Loaded.";
             }
             catch (ArgumentException)
@@ -111,16 +100,16 @@ namespace MSSSStaffManagement
         {
             try
             {
-                var sw = new Stopwatch();
-                Trace.TraceInformation("Stopwatch start.");
-                sw.Start();
+                
+                
+                var sw = Stopwatch.StartNew();                                          Trace.TraceInformation("Stopwatch start.");
                 using (StreamWriter writer = new StreamWriter(File.Open(path, FileMode.Open), Encoding.UTF8))
                 {
                     foreach (var item in MasterFile)
                         writer.WriteLine(item.Key + "," + item.Value);
                 }
-                sw.Stop();
-                Trace.TraceInformation(sw.ElapsedMilliseconds + "ms | Dictionary SaveData()");
+                sw.Stop();                                                              Trace.TraceInformation(sw.ElapsedMilliseconds + "ms | Dictionary SaveData()");
+
                 Trace.TraceInformation("Saved to file. Path: " + path + "\n");
             }
             catch
@@ -242,8 +231,7 @@ namespace MSSSStaffManagement
                     if (item.Value.ToUpper().StartsWith((sender as TextBox).Text.ToUpper()))
                         listBoxFiltered.Items.Add(item.Key + " " + item.Value);
                 }
-                sw.Stop();
-                Trace.TraceInformation(sw.ElapsedTicks + " ticks | LIST FILTER");
+                sw.Stop();                                                              Trace.TraceInformation(sw.ElapsedTicks + " ticks | LIST FILTER");
             }
         }
         private void listBoxFiltered_MouseClick(object sender, MouseEventArgs e)
