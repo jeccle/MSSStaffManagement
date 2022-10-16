@@ -117,7 +117,6 @@
             this.textBoxNameAdmin.Name = "textBoxNameAdmin";
             this.textBoxNameAdmin.Size = new System.Drawing.Size(148, 20);
             this.textBoxNameAdmin.TabIndex = 0;
-            this.textBoxNameAdmin.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox_MouseClick);
             this.textBoxNameAdmin.TextChanged += new System.EventHandler(this.textBox_TextChanged);
             // 
             // textBoxPhoneAdmin
@@ -128,7 +127,6 @@
             this.textBoxPhoneAdmin.ReadOnly = true;
             this.textBoxPhoneAdmin.Size = new System.Drawing.Size(148, 20);
             this.textBoxPhoneAdmin.TabIndex = 1;
-            this.textBoxPhoneAdmin.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox_MouseClick);
             this.textBoxPhoneAdmin.TextChanged += new System.EventHandler(this.textBox_TextChanged);
             this.textBoxPhoneAdmin.Leave += new System.EventHandler(this.textBox_Leave);
             // 
