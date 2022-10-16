@@ -131,7 +131,7 @@
             this.textBoxPhoneAdmin.TabIndex = 1;
             this.textBoxPhoneAdmin.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox_MouseClick);
             this.textBoxPhoneAdmin.TextChanged += new System.EventHandler(this.textBox_TextChanged);
-            this.textBoxPhoneAdmin.Leave += new System.EventHandler(this.textBoxPhoneAdmin_Leave);
+            this.textBoxPhoneAdmin.Leave += new System.EventHandler(this.textBox_Leave);
             // 
             // statusStrip
             // 

@@ -186,16 +186,17 @@ namespace MSSSStaffManagement
             confirmed = false;
             if (e.Alt && e.KeyCode == Keys.X)
             {   // Sets focus to Name Box.
+                textBoxNameAdmin.Enabled = true;
                 textBoxNameAdmin.Focus();
             }
             if (e.Alt && e.KeyCode == Keys.C)
             {   // Sets focus to Phone ID Box.
-                textBoxPhoneAdmin.ReadOnly = false;
+                textBoxPhoneAdmin.Enabled = true;
                 textBoxPhoneAdmin.Focus();
             }
             if (e.Alt && e.KeyCode == Keys.F)
             {   // Creates new staff ID.
-                //textBoxPhoneAdmin.ReadOnly = false;
+                textBoxPhoneAdmin.Enabled = true;
                 CreateID();
             }
             if (e.Alt && e.KeyCode == Keys.S)
@@ -240,9 +241,9 @@ namespace MSSSStaffManagement
             }
             textBoxUpdatedDetail.Text = textBoxPhoneAdmin.Text + " " + textBoxNameAdmin.Text;
         }
-        private void textBoxPhoneAdmin_Leave(object sender, EventArgs e)
+        private void textBox_Leave(object sender, EventArgs e)
         {
-            textBoxPhoneAdmin.ReadOnly = true;
+            textBoxPhoneAdmin.Enabled = false;
         }
         private void textBox_MouseClick(object sender, MouseEventArgs e)
         {
@@ -252,5 +253,7 @@ namespace MSSSStaffManagement
 
 
         #endregion
+
+
     }
 }
