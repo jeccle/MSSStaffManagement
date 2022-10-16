@@ -111,7 +111,6 @@ namespace MSSSStaffManagement
             textBox.ReadOnly = false;
             textBox.Enabled = true;
             textBox.Focus();
-
         }
         
         #endregion
@@ -177,7 +176,6 @@ namespace MSSSStaffManagement
             DisplayItems(listBoxRead);
             textBoxPhone.Focus();
             toolTipGen.Show("Enter Phone ID to search.", textBoxPhone, 2000);
-
         }
         private void textBox_TextChanged(object sender, EventArgs e)
         {
