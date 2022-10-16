@@ -34,18 +34,15 @@ namespace MSSSStaffManagement
         {
             try
             {
-                var sw = new Stopwatch();
-                sw.Start();
+
                 using (var reader = new StreamReader(File.Open(path, FileMode.Open), Encoding.UTF8, false))
                 {
                     Trace.TraceInformation("Loading from " + path);
-                    while (!reader.EndOfStream)
+                    while (!reader.EndOfStream)                                                                          
                     {
                         string[] items = reader.ReadLine().Split(',');
                         MasterFile.Add(items[0], items[1]);
                     }
-                    sw.Stop();
-                    Trace.TraceInformation(sw.ElapsedTicks + " ticks | Dictionary ReadFile()");
                     return "Staff List Loaded.";
                 }
             }
@@ -62,16 +59,11 @@ namespace MSSSStaffManagement
         {
             try
             {
-                var sw = new Stopwatch();
-                Trace.TraceInformation("Stopwatch start.");
-                sw.Start();
-                using (StreamWriter writer = new StreamWriter(File.Open(path, FileMode.Open), Encoding.UTF8))
+                using (StreamWriter writer = new StreamWriter(File.Open(path, FileMode.Open), Encoding.UTF8))       
                 {
                     foreach (var item in MasterFile)
                         writer.WriteLine(item.Key + "," + item.Value);
                 }
-                sw.Stop();
-                Trace.TraceInformation(sw.ElapsedMilliseconds + "ms | Dictionary SaveData()");
                 Trace.TraceInformation("Saved to file. Path: " + path + "\n");
             }
             catch
@@ -172,6 +164,7 @@ namespace MSSSStaffManagement
         private void GerneralForm_Load(object sender, EventArgs e)
         {   // Change ReadFile method here.
             Trace.Listeners.Add(new TextWriterTraceListener("TraceLog.txt", "myListener"));
+            Trace.Write("\n");
             statusLabel.Text = ReadFile(path);
             DisplayItems(listBoxRead);
             textBoxPhone.Focus();
