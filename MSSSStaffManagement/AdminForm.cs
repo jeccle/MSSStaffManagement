@@ -144,7 +144,7 @@ namespace MSSSStaffManagement
         private async Task ConfirmTask(Control form)
         {   // Makes a Task Completion Source that forces the application to wait for a keydown event.
             var tcs = new TaskCompletionSource<bool>();
-            async void LocalHandler(object s, KeyEventArgs a)
+            void LocalHandler(object s, KeyEventArgs a)
             {
                 if (a.KeyCode == Keys.Enter)
                     confirmed = true;

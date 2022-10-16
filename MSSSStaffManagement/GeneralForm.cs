@@ -54,55 +54,6 @@ namespace MSSSStaffManagement
                 return "Values already exist within list.";
             }
         }
-        public static string ReadFileStreamReader(string path)
-        {
-            try
-            {
-                string[] items;
-                var sw = new Stopwatch();
-                sw.Start();
-                using (StreamReader sr = File.OpenText(path))
-                {
-                    Trace.TraceInformation("Loading from " + path);
-                    while (!sr.EndOfStream)
-                    {
-                        items = sr.ReadLine().Split(',');
-                        MasterFile.Add(items[0], items[1]);
-                    }
-                }
-                sw.Stop();
-                Trace.TraceInformation(sw.ElapsedTicks + " ticks | Dictionary ReadFileStreamReader()");
-                return "Staff List Loaded.";
-            }
-            catch (ArgumentException)
-            {
-                return "Values already exist within list.";
-            }
-        }
-        public static string ReadFileReadAllLines(string path)
-        {
-            try
-            {
-                var sw = new Stopwatch();
-                sw.Start();
-                
-                    Trace.TraceInformation("Loading from " + path);
-                    var allLines = File.ReadLines(path);
-                    foreach (var line in allLines)
-                    {
-                        string[] items = line.Split(',');
-                        MasterFile.Add(items[0], items[1]);
-                    }
-                
-                sw.Stop();
-                Trace.TraceInformation(sw.ElapsedTicks + " ticks | Dictionary ReadFileReadAllLines()");
-                return "Staff List Loaded.";
-            }
-            catch (ArgumentException)
-            {
-                return "Values already exist within list.";
-            }
-        }
         public static Dictionary<string, string> GetDictionary()
         {
             return MasterFile;
@@ -155,6 +106,14 @@ namespace MSSSStaffManagement
             toolTipGen.Show(message, control, x, y, 5000);
             toolTipGen.Show(message, control, x, y, 5000);
         }
+        private void FocusTextBox(TextBox textBox)
+        {
+            textBox.ReadOnly = false;
+            textBox.Enabled = true;
+            textBox.Focus();
+
+        }
+        
         #endregion
 
         #region Form Event/Controls
@@ -173,18 +132,16 @@ namespace MSSSStaffManagement
             }
             if (e.Alt && e.KeyCode == Keys.X)
             {   // Sets focus to Name Box.
-                textBoxName.Focus();
-                textBoxName.Clear();
                 textBoxPhone.Clear();
-                textBoxName.ReadOnly = false;
+                textBoxName.Clear();
+                FocusTextBox(textBoxName);    
                 toolTipGen.ToolTipTitle = "Filter Name";
                 ShowToolTip("Enter Name to search.", textBoxName, 20, 17);
             }
             if (e.Alt && e.KeyCode == Keys.C)
             {   // Sets focus to Phone Box.
-                textBoxPhone.Focus();
                 textBoxName.Clear();
-                textBoxPhone.ReadOnly = false;
+                FocusTextBox(textBoxPhone);
                 toolTipGen.ToolTipTitle = "Filter Phone ID";
                 ShowToolTip("Enter Phone ID to search.", textBoxPhone, 20, 17);
             }
@@ -222,7 +179,6 @@ namespace MSSSStaffManagement
             toolTipGen.Show("Enter Phone ID to search.", textBoxPhone, 2000);
 
         }
-
         private void textBox_TextChanged(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty((sender as TextBox).Text))
@@ -237,18 +193,19 @@ namespace MSSSStaffManagement
                 }
             }
         }
-        private void textBox_MouseClick(object sender, MouseEventArgs e)
-        {
-            (sender as TextBox).ReadOnly = true;
-        }
         private void listBoxFiltered_MouseClick(object sender, MouseEventArgs e)
         {
             (sender as ListBox).SelectionMode = SelectionMode.None;
+        }
+        private void textBox_Leave(object sender, EventArgs e)
+        {
+            (sender as TextBox).Enabled = false;
         }
 
 
 
         #endregion
+
 
 
     }
