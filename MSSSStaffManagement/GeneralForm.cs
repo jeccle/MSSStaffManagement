@@ -222,6 +222,7 @@ namespace MSSSStaffManagement
         private void GerneralForm_Load(object sender, EventArgs e)
         {   // Change ReadFile method here.
             Trace.Listeners.Add(new TextWriterTraceListener("TraceLog.txt", "myListener"));
+            Trace.Write("\n");
             statusLabel.Text = ReadFileReadAllLines(path);
             DisplayItems(listBoxRead);
             textBoxPhone.Focus();
@@ -233,6 +234,7 @@ namespace MSSSStaffManagement
             if (!string.IsNullOrEmpty((sender as TextBox).Text))
             {
                 listBoxFiltered.Items.Clear();
+                var sw = Stopwatch.StartNew();
                 foreach (var item in MasterFile)
                 {
                     if (item.Key.StartsWith((sender as TextBox).Text))
@@ -240,6 +242,8 @@ namespace MSSSStaffManagement
                     if (item.Value.ToUpper().StartsWith((sender as TextBox).Text.ToUpper()))
                         listBoxFiltered.Items.Add(item.Key + " " + item.Value);
                 }
+                sw.Stop();
+                Trace.TraceInformation(sw.ElapsedTicks + " ticks | LIST FILTER");
             }
         }
         private void listBoxFiltered_MouseClick(object sender, MouseEventArgs e)
