@@ -196,7 +196,7 @@ namespace MSSSStaffManagement
             }
             if (e.Alt && e.KeyCode == Keys.F)
             {   // Creates new staff ID.
-                //textBoxPhoneAdmin.ReadOnly = false;
+                textBoxNameAdmin.Enabled = true;
                 CreateID();
             }
             if (e.Alt && e.KeyCode == Keys.S)
