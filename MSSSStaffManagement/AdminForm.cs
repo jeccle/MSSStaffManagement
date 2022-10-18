@@ -92,7 +92,7 @@ namespace MSSSStaffManagement
                 toolTipAdmin.ToolTipTitle = "Create ID";
                 toolTipAdmin.ToolTipIcon = ToolTipIcon.Info;
                 statusLabel.Text = "Press ENTER to confirm.";
-                ShowToolTip("Add new ID?", textBoxPhoneAdmin, 20, 20);
+                ShowToolTip("Add new ID?", textBoxDetailsAdmin, 100, 20);
                 await ConfirmTask(this);
                 if (confirmed)
                 {
@@ -251,7 +251,7 @@ namespace MSSSStaffManagement
                         textBoxPhoneAdmin.Text = GeneralForm.GetDictionary()[textBoxNameAdmin.Text];
                     break;
             }
-            textBoxUpdatedDetail.Text = textBoxPhoneAdmin.Text + " " + textBoxNameAdmin.Text;
+            textBoxDetailsAdmin.Text = textBoxPhoneAdmin.Text + " " + textBoxNameAdmin.Text;
         }
         private void textBox_Leave(object sender, EventArgs e)
         {

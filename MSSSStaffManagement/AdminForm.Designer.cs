@@ -35,7 +35,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBoxUpdatedDetail = new System.Windows.Forms.TextBox();
+            this.textBoxDetailsAdmin = new System.Windows.Forms.TextBox();
             this.textBoxNameAdmin = new System.Windows.Forms.TextBox();
             this.textBoxPhoneAdmin = new System.Windows.Forms.TextBox();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
@@ -74,7 +74,7 @@
             // 
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this.textBoxUpdatedDetail);
+            this.groupBox2.Controls.Add(this.textBoxDetailsAdmin);
             this.groupBox2.Controls.Add(this.textBoxNameAdmin);
             this.groupBox2.Controls.Add(this.textBoxPhoneAdmin);
             this.groupBox2.Location = new System.Drawing.Point(11, 13);
@@ -102,15 +102,15 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Phone ID";
             // 
-            // textBoxUpdatedDetail
+            // textBoxDetailsAdmin
             // 
-            this.textBoxUpdatedDetail.Enabled = false;
-            this.textBoxUpdatedDetail.Location = new System.Drawing.Point(18, 88);
-            this.textBoxUpdatedDetail.Name = "textBoxUpdatedDetail";
-            this.textBoxUpdatedDetail.ReadOnly = true;
-            this.textBoxUpdatedDetail.Size = new System.Drawing.Size(199, 20);
-            this.textBoxUpdatedDetail.TabIndex = 2;
-            this.textBoxUpdatedDetail.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxDetailsAdmin.Enabled = false;
+            this.textBoxDetailsAdmin.Location = new System.Drawing.Point(18, 88);
+            this.textBoxDetailsAdmin.Name = "textBoxDetailsAdmin";
+            this.textBoxDetailsAdmin.ReadOnly = true;
+            this.textBoxDetailsAdmin.Size = new System.Drawing.Size(199, 20);
+            this.textBoxDetailsAdmin.TabIndex = 2;
+            this.textBoxDetailsAdmin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBoxNameAdmin
             // 
@@ -188,7 +188,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBoxUpdatedDetail;
+        private System.Windows.Forms.TextBox textBoxDetailsAdmin;
         private System.Windows.Forms.TextBox textBoxNameAdmin;
         private System.Windows.Forms.TextBox textBoxPhoneAdmin;
         private System.Windows.Forms.StatusStrip statusStrip;
