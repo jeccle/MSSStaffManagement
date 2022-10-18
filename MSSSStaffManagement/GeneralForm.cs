@@ -25,8 +25,8 @@ namespace MSSSStaffManagement
         {
             InitializeComponent();
         }
-        public static Dictionary<string, string> MasterFile = new Dictionary<string, string>();
-        public static Dictionary<string, string> backupDict = MasterFile;
+        public static Dictionary<int, string> MasterFile = new Dictionary<int, string>();
+        public static Dictionary<int, string> backupDict = MasterFile;
         string path = @"MalinStaffNamesV2.csv";
 
         #region Global Methods
@@ -41,7 +41,7 @@ namespace MSSSStaffManagement
                     while (!reader.EndOfStream)                                                                          
                     {
                         string[] items = reader.ReadLine().Split(',');
-                        MasterFile.Add(items[0], items[1]);
+                        MasterFile.Add(int.Parse(items[0]), items[1]);
                     }
                     return "Staff List Loaded.";
                 }
@@ -51,7 +51,7 @@ namespace MSSSStaffManagement
                 return "Values already exist within list.";
             }
         }
-        public static Dictionary<string, string> GetDictionary()
+        public static Dictionary<int, string> GetDictionary()
         {
             return MasterFile;
         }
@@ -71,7 +71,7 @@ namespace MSSSStaffManagement
                 Trace.TraceInformation("Error occurred during saving");
             }
         }
-        public static void SetDictionary(Dictionary<string, string> dict)
+        public static void SetDictionary(Dictionary<int, string> dict)
         {
             MasterFile = dict;
         }
@@ -177,7 +177,7 @@ namespace MSSSStaffManagement
                 listBoxFiltered.Items.Clear();
                 foreach (var item in MasterFile)
                 {
-                    if (item.Key.StartsWith((sender as TextBox).Text))
+                    if (item.Key.ToString().StartsWith((sender as TextBox).Text))
                         listBoxFiltered.Items.Add(item.Key + " " + item.Value);
                     if (item.Value.ToUpper().StartsWith((sender as TextBox).Text.ToUpper()))
                         listBoxFiltered.Items.Add(item.Key + " " + item.Value);

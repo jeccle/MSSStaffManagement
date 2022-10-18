@@ -25,7 +25,7 @@ namespace MSSSStaffManagement
         bool confirmed;
 
         #region Control Methods
-        private async void UpdateID(string key)
+        private async void UpdateID(int key)
         {
             //confirmed = false;
             statusLabel.Text = "Press ENTER to confirm.";
@@ -50,7 +50,7 @@ namespace MSSSStaffManagement
             else
                 statusLabel.Text = "ID Name not updated.";
         }
-        private async void RemoveItem(string key)
+        private async void RemoveItem(int key)
         {
             //confirmed = false;
             statusLabel.Text = "Press ENTER to confirm.";
@@ -88,7 +88,7 @@ namespace MSSSStaffManagement
                 await ConfirmTask(this);
                 if (confirmed)
                 {
-                    GeneralForm.GetDictionary().Add(textBoxPhoneAdmin.Text, textBoxNameAdmin.Text);
+                    GeneralForm.GetDictionary().Add(int.Parse(textBoxPhoneAdmin.Text), textBoxNameAdmin.Text);
                     statusLabel.Text = textBoxPhoneAdmin.Text + " " + textBoxNameAdmin.Text + " added to List.";
                     ClearTextBoxes();
                 }
@@ -116,7 +116,7 @@ namespace MSSSStaffManagement
             {
                 if (numInterval == 3) 
                 {   newID--; numInterval = 0; }
-                if (item.Key.Substring(0, 4) == newID.ToString())
+                if (item.Key.ToString().Substring(0, 4) == newID.ToString())
                     numInterval++;
                 else
                 {
@@ -135,7 +135,7 @@ namespace MSSSStaffManagement
             {
                 if (numInterval == 3)
                 {   newID--; numInterval = 0; }
-                if (item.Key.Substring(0, 4) == newID.ToString())
+                if (item.Key.ToString().Substring(0, 4) == newID.ToString())
                     numInterval++;
             }
             var rand = new Random();
@@ -202,11 +202,11 @@ namespace MSSSStaffManagement
             }
             if (e.Alt && e.KeyCode == Keys.S)
             {   // Removes item from dictionary.
-                RemoveItem(textBoxPhoneAdmin.Text);
+                RemoveItem(int.Parse(textBoxPhoneAdmin.Text));
             }
             if (e.Alt && e.KeyCode == Keys.V)
             {   // Updates ID record.
-                UpdateID(textBoxPhoneAdmin.Text);
+                UpdateID(int.Parse(textBoxPhoneAdmin.Text));
             }
             if (e.Alt && e.KeyCode == Keys.T)
             {
@@ -232,12 +232,12 @@ namespace MSSSStaffManagement
             switch ((sender as TextBox).Name)
             {
                 case "textBoxPhoneAdmin":
-                    if (GeneralForm.GetDictionary().ContainsKey(textBoxPhoneAdmin.Text))
-                        textBoxNameAdmin.Text = GeneralForm.GetDictionary()[textBoxPhoneAdmin.Text];
+                    if (GeneralForm.GetDictionary().ContainsKey(int.Parse(textBoxPhoneAdmin.Text)))
+                        textBoxNameAdmin.Text = GeneralForm.GetDictionary()[int.Parse(textBoxPhoneAdmin.Text)];
                     break;
                 case "textBoxNameAdmin":
-                    if (GeneralForm.GetDictionary().ContainsKey(textBoxNameAdmin.Text))
-                        textBoxPhoneAdmin.Text = GeneralForm.GetDictionary()[textBoxNameAdmin.Text];
+                    if (GeneralForm.GetDictionary().ContainsKey(int.Parse(textBoxNameAdmin.Text)))
+                        textBoxPhoneAdmin.Text = GeneralForm.GetDictionary()[int.Parse(textBoxNameAdmin.Text)];
                     break;
             }
             textBoxDetailsAdmin.Text = textBoxPhoneAdmin.Text + " " + textBoxNameAdmin.Text;
