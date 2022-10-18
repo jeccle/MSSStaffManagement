@@ -104,6 +104,7 @@
             // 
             // textBoxUpdatedDetail
             // 
+            this.textBoxUpdatedDetail.Enabled = false;
             this.textBoxUpdatedDetail.Location = new System.Drawing.Point(18, 88);
             this.textBoxUpdatedDetail.Name = "textBoxUpdatedDetail";
             this.textBoxUpdatedDetail.ReadOnly = true;
