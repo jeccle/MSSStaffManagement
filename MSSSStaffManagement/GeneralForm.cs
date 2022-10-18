@@ -224,17 +224,31 @@ namespace MSSSStaffManagement
             {
                 listBoxFiltered.Items.Clear();
                 var sw = Stopwatch.StartNew();
-                foreach (var item in MasterFile)
-                {
-                    if (item.Key.ToString().StartsWith((sender as TextBox).Text))
-                        listBoxFiltered.Items.Add(item.Key + " " + item.Value);
-                    if (item.Value.ToUpper().StartsWith((sender as TextBox).Text.ToUpper()))
-                        listBoxFiltered.Items.Add(item.Key + " " + item.Value);
-                }
-                sw.Stop();                                                              Trace.TraceInformation(sw.ElapsedTicks + " ticks | LIST FILTER");
+                //foreach (var item in MasterFile)
+                //{
+                //    if (item.Key.ToString().StartsWith((sender as TextBox).Text))
+                //        listBoxFiltered.Items.Add(item.Key + " " + item.Value);
+                //    if (item.Value.ToUpper().StartsWith((sender as TextBox).Text.ToUpper()))
+                //        listBoxFiltered.Items.Add(item.Key + " " + item.Value);
+                //}
+                //sw.Stop(); Trace.TraceInformation(sw.ElapsedTicks + " ticks | #1 Foreach List Filter");
 
                 // #2
+                switch ((sender as TextBox).Name)
+                {
+                    case "textBoxPhone":
+                        foreach (var item in MasterFile.Where(kvp => kvp.Key.ToString().StartsWith(textBoxPhone.Text)))
+                            listBoxFiltered.Items.Add(item.Key + " " + item.Value);
+                        break;
 
+                    case "textBoxName":
+                        foreach (var item in MasterFile.Where(kvp => kvp.Value.ToUpper().StartsWith(textBoxName.Text.ToUpper())))
+                            listBoxFiltered.Items.Add(item.Key + " " + item.Value);
+                        break;
+                    default:
+                        break;
+                }
+                sw.Stop(); Trace.TraceInformation(sw.ElapsedTicks + " ticks | #2 Switch List Filter");
             }
         }
         private void listBoxFiltered_MouseClick(object sender, MouseEventArgs e)
