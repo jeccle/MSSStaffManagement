@@ -42,7 +42,7 @@ namespace MSSSStaffManagement
                         string[] items = reader.ReadLine().Split(',');
                         MasterFile.Add(items[0], items[1]);
                     }
-                    sw.Stop();                                                          Trace.TraceInformation(sw.ElapsedTicks + " ticks | Dictionary ReadFile()");
+                    sw.Stop();                                                          Trace.TraceInformation(sw.ElapsedTicks + " ticks | ReadFile() Dictionary");
                     return "Staff List Loaded.";
                 }
             }
@@ -65,7 +65,7 @@ namespace MSSSStaffManagement
                         MasterFile.Add(items[0], items[1]);
                     }
                 }
-                sw.Stop();                                                              Trace.TraceInformation(sw.ElapsedTicks + " ticks | Dictionary ReadFileStreamReader()");
+                sw.Stop();                                                              Trace.TraceInformation(sw.ElapsedTicks + " ticks | ReadFileStreamReader() Dictionary");
                 return "Staff List Loaded.";
             }
             catch (ArgumentException)
@@ -84,7 +84,7 @@ namespace MSSSStaffManagement
                     string[] items = line.Split(',');
                     MasterFile.Add(items[0], items[1]);
                 }
-                sw.Stop();                                                              Trace.TraceInformation(sw.ElapsedTicks + " ticks | Dictionary ReadFileReadAllLines()");
+                sw.Stop();                                                              Trace.TraceInformation(sw.ElapsedTicks + " ticks | ReadFileReadAllLines() Dictionary");
                 return "Staff List Loaded.";
             }
             catch (ArgumentException)
@@ -108,7 +108,7 @@ namespace MSSSStaffManagement
                     foreach (var item in MasterFile)
                         writer.WriteLine(item.Key + "," + item.Value);
                 }
-                sw.Stop();                                                              Trace.TraceInformation(sw.ElapsedMilliseconds + "ms | Dictionary SaveData()");
+                sw.Stop();                                                              Trace.TraceInformation(sw.ElapsedMilliseconds + "ms | SaveData() Dictionary");
 
                 Trace.TraceInformation("Saved to file. Path: " + path + "\n");
             }
