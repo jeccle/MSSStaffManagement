@@ -51,7 +51,7 @@
             this.textBoxKeyBinds.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxKeyBinds.Enabled = false;
             this.textBoxKeyBinds.Font = new System.Drawing.Font("Lato", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxKeyBinds.Location = new System.Drawing.Point(44, 18);
+            this.textBoxKeyBinds.Location = new System.Drawing.Point(38, 18);
             this.textBoxKeyBinds.Multiline = true;
             this.textBoxKeyBinds.Name = "textBoxKeyBinds";
             this.textBoxKeyBinds.ReadOnly = true;
@@ -111,6 +111,7 @@
             this.textBoxUpdatedDetail.ReadOnly = true;
             this.textBoxUpdatedDetail.Size = new System.Drawing.Size(199, 20);
             this.textBoxUpdatedDetail.TabIndex = 2;
+            this.textBoxUpdatedDetail.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBoxNameAdmin
             // 
