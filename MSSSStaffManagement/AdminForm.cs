@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -76,22 +77,31 @@ namespace MSSSStaffManagement
         }
         private async void CreateID()
         {
+            Stopwatch sw = new Stopwatch();
             if (textBoxPhoneAdmin.Text.Length != 9)
+            {
+                sw.Restart();
                 textBoxPhoneAdmin.Text = GenerateNewIDUnsorted().ToString();
+                sw.Stop();
+                Trace.TraceInformation(sw.ElapsedMilliseconds + "ms | Dictionary GenerateIDUnsorted()");
+            }
             if (!string.IsNullOrEmpty(textBoxNameAdmin.Text))
             {
-                
+
                 //confirmed = false;
                 toolTipAdmin.ToolTipTitle = "Create ID";
                 toolTipAdmin.ToolTipIcon = ToolTipIcon.Info;
-                statusLabel.Text =  "Press ENTER to confirm.";
+                statusLabel.Text = "Press ENTER to confirm.";
                 ShowToolTip("Add new ID?", textBoxPhoneAdmin, 20, 20);
                 await ConfirmTask(this);
                 if (confirmed)
                 {
+                    sw.Restart();
                     GeneralForm.GetDictionary().Add(textBoxPhoneAdmin.Text, textBoxNameAdmin.Text);
                     statusLabel.Text = textBoxPhoneAdmin.Text + " " + textBoxNameAdmin.Text + " added to List.";
                     ClearTextBoxes();
+                    sw.Stop();
+                    Trace.TraceInformation(sw.ElapsedMilliseconds + "ms | Dictionary CreateID()");
                 }
                 else
                 {
