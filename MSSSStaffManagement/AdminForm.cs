@@ -83,7 +83,7 @@ namespace MSSSStaffManagement
                 sw.Restart();
                 textBoxPhoneAdmin.Text = GenerateNewIDUnsorted().ToString();
                 sw.Stop();
-                Trace.TraceInformation(sw.ElapsedMilliseconds + "ms | Dictionary GenerateIDUnsorted()");
+                Trace.TraceInformation(sw.ElapsedTicks + " ticks | Dictionary GenerateIDUnsorted()");
             }
             if (!string.IsNullOrEmpty(textBoxNameAdmin.Text))
             {
@@ -101,7 +101,7 @@ namespace MSSSStaffManagement
                     statusLabel.Text = textBoxPhoneAdmin.Text + " " + textBoxNameAdmin.Text + " added to List.";
                     ClearTextBoxes();
                     sw.Stop();
-                    Trace.TraceInformation(sw.ElapsedMilliseconds + "ms | Dictionary CreateID()");
+                    Trace.TraceInformation(sw.ElapsedTicks + " ticks. | Dictionary CreateID()");
                 }
                 else
                 {
