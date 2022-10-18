@@ -182,6 +182,22 @@ namespace MSSSStaffManagement
                     if (item.Value.ToUpper().StartsWith((sender as TextBox).Text.ToUpper()))
                         listBoxFiltered.Items.Add(item.Key + " " + item.Value);
                 }
+                
+                // #2
+                switch ((sender as TextBox).Name)
+                {
+                    case "textBoxPhone":
+                        var keyValuePhone = MasterFile.FirstOrDefault(kvp => kvp.Key.ToString().StartsWith(textBoxPhone.Text));
+                            listBoxFiltered.Items.Add(keyValuePhone.Key + " " + keyValuePhone.Value);
+                        break;
+
+                    case "textBoxName":
+                        var keyValueName = MasterFile.FirstOrDefault(kvp => kvp.Value.ToString().StartsWith(textBoxName.Text));
+                        listBoxFiltered.Items.Add(keyValueName.Key + " " + keyValueName.Value);
+                        break;
+                    default:
+                        break;
+                }
             }
         }
         private void listBoxFiltered_MouseClick(object sender, MouseEventArgs e)

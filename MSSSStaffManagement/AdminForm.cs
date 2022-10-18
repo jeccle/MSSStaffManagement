@@ -125,6 +125,8 @@ namespace MSSSStaffManagement
                     break;
                 }
             }
+            if (GeneralForm.GetDictionary().ContainsKey(newID))
+                newID = GenerateNewID();
             return newID;
         }
         private int GenerateNewIDUnsorted()
@@ -140,6 +142,8 @@ namespace MSSSStaffManagement
             }
             var rand = new Random();
             newID = int.Parse(newID.ToString() + rand.Next(10000, 99999).ToString());
+            if (GeneralForm.GetDictionary().ContainsKey(newID))
+                newID = GenerateNewIDUnsorted();
             return newID;
         }
         private async Task ConfirmTask(Control form)
@@ -236,8 +240,8 @@ namespace MSSSStaffManagement
                         textBoxNameAdmin.Text = GeneralForm.GetDictionary()[int.Parse(textBoxPhoneAdmin.Text)];
                     break;
                 case "textBoxNameAdmin":
-                    if (GeneralForm.GetDictionary().ContainsKey(int.Parse(textBoxNameAdmin.Text)))
-                        textBoxPhoneAdmin.Text = GeneralForm.GetDictionary()[int.Parse(textBoxNameAdmin.Text)];
+                    if (GeneralForm.GetDictionary().ContainsValue(textBoxNameAdmin.Text))
+                        textBoxPhoneAdmin.Text = GeneralForm.GetDictionary().FirstOrDefault(kvp => kvp.Value.ToString().Equals(textBoxNameAdmin.Text)).Key.ToString();
                     break;
             }
             textBoxDetailsAdmin.Text = textBoxPhoneAdmin.Text + " " + textBoxNameAdmin.Text;
