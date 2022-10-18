@@ -109,6 +109,7 @@
             this.textBoxUpdatedDetail.ReadOnly = true;
             this.textBoxUpdatedDetail.Size = new System.Drawing.Size(199, 20);
             this.textBoxUpdatedDetail.TabIndex = 2;
+            this.textBoxUpdatedDetail.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBoxNameAdmin
             // 

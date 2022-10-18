@@ -76,9 +76,11 @@ namespace MSSSStaffManagement
         }
         private async void CreateID()
         {
+            if (textBoxPhoneAdmin.Text.Length != 9)
+                textBoxPhoneAdmin.Text = GenerateNewIDUnsorted().ToString();
             if (!string.IsNullOrEmpty(textBoxNameAdmin.Text))
             {
-                textBoxPhoneAdmin.Text = GenerateNewIDUnsorted().ToString();
+                
                 //confirmed = false;
                 toolTipAdmin.ToolTipTitle = "Create ID";
                 toolTipAdmin.ToolTipIcon = ToolTipIcon.Info;
