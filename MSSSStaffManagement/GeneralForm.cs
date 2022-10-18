@@ -175,25 +175,26 @@ namespace MSSSStaffManagement
             if (!string.IsNullOrEmpty((sender as TextBox).Text))
             {
                 listBoxFiltered.Items.Clear();
-                foreach (var item in MasterFile)
-                {
-                    if (item.Key.ToString().StartsWith((sender as TextBox).Text))
-                        listBoxFiltered.Items.Add(item.Key + " " + item.Value);
-                    if (item.Value.ToUpper().StartsWith((sender as TextBox).Text.ToUpper()))
-                        listBoxFiltered.Items.Add(item.Key + " " + item.Value);
-                }
-                
+                // #1
+                //foreach (var item in MasterFile)
+                //{
+                //    if (item.Key.ToString().StartsWith((sender as TextBox).Text))
+                //        listBoxFiltered.Items.Add(item.Key + " " + item.Value);
+                //    if (item.Value.ToUpper().StartsWith((sender as TextBox).Text.ToUpper()))
+                //        listBoxFiltered.Items.Add(item.Key + " " + item.Value);
+                //}
+
                 // #2
                 switch ((sender as TextBox).Name)
                 {
                     case "textBoxPhone":
-                        var keyValuePhone = MasterFile.FirstOrDefault(kvp => kvp.Key.ToString().StartsWith(textBoxPhone.Text));
-                            listBoxFiltered.Items.Add(keyValuePhone.Key + " " + keyValuePhone.Value);
+                        foreach (var item in MasterFile.Where(kvp => kvp.Key.ToString().StartsWith(textBoxPhone.Text)))
+                            listBoxFiltered.Items.Add(item.Key + " " + item.Value);
                         break;
 
                     case "textBoxName":
-                        var keyValueName = MasterFile.FirstOrDefault(kvp => kvp.Value.ToString().StartsWith(textBoxName.Text));
-                        listBoxFiltered.Items.Add(keyValueName.Key + " " + keyValueName.Value);
+                        foreach (var item in MasterFile.Where(kvp => kvp.Value.ToUpper().StartsWith(textBoxName.Text.ToUpper())))
+                            listBoxFiltered.Items.Add(item.Key + " " + item.Value);
                         break;
                     default:
                         break;
