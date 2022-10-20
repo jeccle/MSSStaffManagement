@@ -81,13 +81,12 @@ namespace MSSSStaffManagement
             if (textBoxPhoneAdmin.Text.Length != 9)
             {
                 sw.Restart();
-                textBoxPhoneAdmin.Text = GenerateNewIDUnsorted().ToString();
+                textBoxPhoneAdmin.Text = GenerateNewIDSimple().ToString();
                 sw.Stop();
                 Trace.TraceInformation(sw.ElapsedTicks + " ticks | GenerateIDUnsorted() Dictionary");
             }
             if (!string.IsNullOrEmpty(textBoxNameAdmin.Text))
             {
-
                 //confirmed = false;
                 toolTipAdmin.ToolTipTitle = "Create ID";
                 toolTipAdmin.ToolTipIcon = ToolTipIcon.Info;
@@ -119,6 +118,13 @@ namespace MSSSStaffManagement
         #endregion
 
         #region Utility Methods
+        private int GenerateNewIDSimple()
+        {
+            int newID = 770000000;
+            while (GeneralForm.GetDictionary().ContainsKey(newID))
+                newID--;
+            return newID;
+        }
         private int GenerateNewID()
         {   // For a sorted setup.
             int newID = 7999;
