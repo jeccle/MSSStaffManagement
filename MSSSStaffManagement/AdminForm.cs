@@ -25,6 +25,10 @@ namespace MSSSStaffManagement
         bool confirmed;
 
         #region Control Methods
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
         private async void UpdateID(int key)
         {
             //confirmed = false;

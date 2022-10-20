@@ -30,6 +30,11 @@ namespace MSSSStaffManagement
         string path = @"MalinStaffNamesV2.csv";
 
         #region Global Methods
+        /// <summary>
+        /// Read content from a specified file path. Content is retrieved from a csv file and added to a global dictionary data structure.
+        /// </summary>
+        /// <param name="path">Path to data file.</param>
+        /// <returns>Returns string value describing process outcome</returns>
         public static string ReadFile(string path)
         {
             try
@@ -50,10 +55,18 @@ namespace MSSSStaffManagement
                 return "Values already exist within list.";
             }
         }
+        /// <summary>
+        /// Retrieves the MasterFile dictionary from current scope.
+        /// </summary>
+        /// <returns>Returns MasterFile Dictionary</returns>
         public static Dictionary<int, string> GetDictionary()
         {
             return MasterFile;
         }
+        /// <summary>
+        /// Saves data to specified path. Data is written to file using streamwriter.
+        /// </summary>
+        /// <param name="path">File Path</param>
         public static void SaveData(string path)
         {
             try
@@ -70,6 +83,10 @@ namespace MSSSStaffManagement
                 Trace.TraceInformation("Error occurred during saving");
             }
         }
+        /// <summary>
+        /// Sets current data structure values.
+        /// </summary>
+        /// <param name="dict">Dictionary to replace current data.</param>
         public static void SetDictionary(Dictionary<int, string> dict)
         {
             MasterFile = dict;
@@ -77,6 +94,10 @@ namespace MSSSStaffManagement
         #endregion
 
         #region Utility Methods     
+        /// <summary>
+        /// Displays selected value in textBoxes.
+        /// </summary>
+        /// <param name="item">Item to be displayed.</param>
         private void DisplayTextBox(string item)
         {
             string[] kvp = item.Split(new char[] { ' ' }, 2);
@@ -84,6 +105,10 @@ namespace MSSSStaffManagement
             textBoxName.Text = kvp[1];
             statusLabel.Text = item + " selected.";
         }
+        /// <summary>
+        /// Displays all items within MasterFile to specified listBox.
+        /// </summary>
+        /// <param name="listBox">Specified listBox to display items.</param>
         private void DisplayItems(ListBox listBox)
         {
             listBox.Items.Clear();
@@ -92,21 +117,35 @@ namespace MSSSStaffManagement
                 listBox.Items.Add(item.Key + " " + item.Value);
             }
         }
+        /// <summary>
+        /// Outputs tooltip in a bubble form pointingn upwards.
+        /// </summary>
+        /// <param name="message">String caption to display on tooltip</param>
+        /// <param name="control">Associated control involved with process.</param>
+        /// <param name="x">X-Axis value</param>
+        /// <param name="y">Y-Axis value</param>
         public void ShowToolTip(string message, Control control, int x, int y)
         {
             toolTipGen.Show(message, control, x, y, 3500);
             toolTipGen.Show(message, control, x, y, 3500);
         }
+        /// <summary>
+        /// Sets textbox properties ReadOnly & Enable to appropriate bool values to enable textBox input.
+        /// </summary>
+        /// <param name="textBox">TextBox control in focus</param>
         private void FocusTextBox(TextBox textBox)
         {
             textBox.ReadOnly = false;
             textBox.Enabled = true;
             textBox.Focus();
         }
-        
         #endregion
 
         #region Form Event/Controls
+        /// <summary>
+        /// Keydown event handler that acts as the control hub for the application.
+        /// Responds to all user input and prompts allication behaviour to match specified key bindings.
+        /// </summary>
         private void GerneralForm_KeyDown(object sender, KeyEventArgs e)
         {   // Activiate KeyPreview property
             if (e.Alt && e.KeyCode == Keys.A)
@@ -136,7 +175,7 @@ namespace MSSSStaffManagement
                 ShowToolTip("Enter Phone ID to search.", textBoxPhone, 20, 17);
             }
             if (e.Alt && e.KeyCode == Keys.L)
-            {   // Exit.
+            {   // Exit Form.
                 Trace.Flush();
                 Close();
             }
@@ -160,15 +199,21 @@ namespace MSSSStaffManagement
             }
 
         }
+        /// <summary>
+        /// On load sets trace listeners and reads from file. Displays items in textboxes after reading from file and outputting
+        /// a file read status message.
+        /// </summary>
         private void GerneralForm_Load(object sender, EventArgs e)
         {   // Change ReadFile method here.
             Trace.Listeners.Add(new TextWriterTraceListener("TraceLog.txt", "myListener"));
             Trace.Write("\n");
             statusLabel.Text = ReadFile(path);
             DisplayItems(listBoxRead);
-            textBoxPhone.Focus();
-            toolTipGen.Show("Enter Phone ID to search.", textBoxPhone, 2000);
         }
+        /// <summary>
+        /// Checks textboxes for input, when there is input it is matched against each value
+        /// within MasterFile and if the values match they are displayed in a filtered listBox.
+        /// </summary>
         private void textBox_TextChanged(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty((sender as TextBox).Text))
@@ -200,19 +245,25 @@ namespace MSSSStaffManagement
                 }
             }
         }
-        private void listBoxFiltered_MouseClick(object sender, MouseEventArgs e)
-        {
-            (sender as ListBox).SelectionMode = SelectionMode.None;
-        }
+        /// <summary>
+        /// Sets textBoxes to disabled when focus is left.
+        /// </summary>
         private void textBox_Leave(object sender, EventArgs e)
         {
             (sender as TextBox).Enabled = false;
         }
-
-
+        /// <summary>
+        /// When form is first shown appropriate tooltip and focus is enabled.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void GeneralForm_Shown(object sender, EventArgs e)
+        {
+            FocusTextBox(textBoxName);
+            ShowToolTip("Enter Phone ID to search.", textBoxPhone, 20, 20);
+        }
 
         #endregion
-
 
 
     }
