@@ -107,7 +107,7 @@
             // 
             this.textBoxKeyBinds.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxKeyBinds.Enabled = false;
-            this.textBoxKeyBinds.Font = new System.Drawing.Font("Lato", 8.25F);
+            this.textBoxKeyBinds.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.textBoxKeyBinds.Location = new System.Drawing.Point(13, 19);
             this.textBoxKeyBinds.Multiline = true;
             this.textBoxKeyBinds.Name = "textBoxKeyBinds";
@@ -178,6 +178,7 @@
             this.Name = "GeneralForm";
             this.Text = "MSSS Staff Management General Form";
             this.Load += new System.EventHandler(this.GerneralForm_Load);
+            this.Shown += new System.EventHandler(this.GeneralForm_Shown);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GerneralForm_KeyDown);
             this.groupBoxInput.ResumeLayout(false);
             this.groupBoxInput.PerformLayout();

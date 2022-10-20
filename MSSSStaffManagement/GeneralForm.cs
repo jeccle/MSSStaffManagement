@@ -101,7 +101,7 @@ namespace MSSSStaffManagement
         {
             try
             {
-                var sw = Stopwatch.StartNew(); Trace.TraceInformation("Stopwatch start.");
+                var sw = Stopwatch.StartNew(); 
                 using (StreamWriter writer = new StreamWriter(File.Open(path, FileMode.Open), Encoding.UTF8))
                 {
                     foreach (var item in MasterFile)
@@ -212,8 +212,6 @@ namespace MSSSStaffManagement
             Trace.Write("\n");
             statusLabel.Text = ReadFileReadAllLines(path);
             DisplayItems(listBoxRead);
-            textBoxPhone.Focus();
-            toolTipGen.Show("Enter Phone ID to search.", textBoxPhone, 2000);
             RunAllTests();
         }
         private void textBox_TextChanged(object sender, EventArgs e)
@@ -257,7 +255,11 @@ namespace MSSSStaffManagement
         {
             (sender as TextBox).Enabled = false;
         }
-
+        private void GeneralForm_Shown(object sender, EventArgs e)
+        {
+            FocusTextBox(textBoxName);
+            ShowToolTip("Enter Phone ID to search.", textBoxPhone, 20, 20);
+        }
         #endregion
 
         #region Form Test
