@@ -31,6 +31,8 @@ namespace MSSSStaffManagement
         string path = @"MalinStaffNamesV2.csv";
 
         #region Global Methods
+
+            #region Read File Methods
         public static string ReadFile(string path)
         {
             try
@@ -43,7 +45,7 @@ namespace MSSSStaffManagement
                         string[] items = reader.ReadLine().Split(',');
                         MasterFile.Add(int.Parse(items[0]), items[1]);
                     }
-                    sw.Stop();                                                                              Trace.TraceInformation(sw.ElapsedTicks + " ticks | ReadFile() Dictionary");
+                    sw.Stop();                                           Trace.TraceInformation(sw.ElapsedTicks + " ticks | ReadFile() Dictionary");
                     return "Staff List Loaded.";
                 }
             }
@@ -52,7 +54,7 @@ namespace MSSSStaffManagement
                 return "Values already exist within list.";
             }
         }
-        public static string ReadFileStreamReader(string path)
+        public static string ReadFileSROpenText(string path)
         {
             try
             {
@@ -66,7 +68,7 @@ namespace MSSSStaffManagement
                         MasterFile.Add(int.Parse(items[0]), items[1]);
                     }
                 }
-                sw.Stop();                                                                                  Trace.TraceInformation(sw.ElapsedTicks + " ticks | ReadFileStreamReader() Dictionary");
+                sw.Stop();                                         Trace.TraceInformation(sw.ElapsedTicks + " ticks | ReadFileSROpenText() Dictionary");
                 return "Staff List Loaded.";
             }
             catch (ArgumentException)
@@ -79,13 +81,13 @@ namespace MSSSStaffManagement
             try
             { Trace.TraceInformation("Loading from " + path);
                 var sw = Stopwatch.StartNew();
-                var allLines = File.ReadLines(path);
+                var allLines = File.ReadAllLines(path);
                 foreach (var line in allLines)
                 {
                     string[] items = line.Split(',');
                     MasterFile.Add(int.Parse(items[0]), items[1]);
                 }
-                sw.Stop();                                                                                  Trace.TraceInformation(sw.ElapsedTicks + " ticks | ReadFileReadAllLines() Dictionary");
+                sw.Stop();                                       Trace.TraceInformation(sw.ElapsedTicks + " ticks | ReadFileReadAllLines() Dictionary");
                 return "Staff List Loaded.";
             }
             catch (ArgumentException)
@@ -93,10 +95,53 @@ namespace MSSSStaffManagement
                 return "Values already exist within list.";
             }
         }
-        public static Dictionary<int, string> GetDictionary()
+        public static string ReadFileSROpenReadReadLine(string path)
         {
-            return MasterFile;
+            try
+            {
+                Trace.TraceInformation("Loading from " + path);
+                var sw = Stopwatch.StartNew();
+                using (StreamReader sr = new StreamReader(File.OpenRead(path)))
+                {
+                    while(!sr.EndOfStream)
+                    {
+                        string[] items = sr.ReadLine().Split(',');
+                        MasterFile.Add(int.Parse(items[0]), items[1]);
+                    }
+                    
+                }
+                sw.Stop(); Trace.TraceInformation(sw.ElapsedTicks + " ticks | ReadFileSROpenReadReadLine() Dictionary");
+                return "Staff List Loaded.";
+            }
+            catch (ArgumentException)
+            {
+                return "Values already exist within list.";
+            }
         }
+        public static string ReadFileTROpenText(string path)
+        {
+            try
+            {
+                Trace.TraceInformation("Loading from " + path);
+                var sw = Stopwatch.StartNew();
+                using (TextReader tr = File.OpenText(path))
+                {
+                    while (tr.ReadLine() != null)
+                    {
+                        string[] items = tr.ReadLine().Split(',');
+                        MasterFile.Add(int.Parse(items[0]), items[1]);
+                    }
+
+                }
+                sw.Stop(); Trace.TraceInformation(sw.ElapsedTicks + " ticks | ReadFileTROpenText() Dictionary");
+                return "Staff List Loaded.";
+            }
+            catch (ArgumentException)
+            {
+                return "Values already exist within list.";
+            }
+        }
+        #endregion
         public static void SaveData(string path)
         {
             try
@@ -210,7 +255,7 @@ namespace MSSSStaffManagement
         {   // Change ReadFile method here.
             Trace.Listeners.Add(new TextWriterTraceListener("TraceLog.txt", "myListener"));
             Trace.Write("\n");
-            statusLabel.Text = ReadFileReadAllLines(path);
+            statusLabel.Text = ReadFileTROpenText(path);
             DisplayItems(listBoxRead);
             RunAllTests();
         }

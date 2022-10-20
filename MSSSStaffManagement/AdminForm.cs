@@ -36,7 +36,7 @@ namespace MSSSStaffManagement
             await ConfirmTask(this);
             if (confirmed)
             {
-                var dict = GeneralForm.GetDictionary();
+                var dict = GeneralForm.MasterFile;
                 if (dict.ContainsKey(key))
                 {
                     dict[key] = textBoxNameAdmin.Text;
@@ -60,10 +60,10 @@ namespace MSSSStaffManagement
             ShowToolTip("Remove ID?", textBoxPhoneAdmin, 20, 20);
             await ConfirmTask(this);
             if (confirmed)
-                if (GeneralForm.GetDictionary().ContainsKey(key))
+                if (GeneralForm.MasterFile.ContainsKey(key))
                 {
                     var sw = Stopwatch.StartNew();
-                    GeneralForm.GetDictionary().Remove(key);
+                    GeneralForm.MasterFile.Remove(key);
                     statusLabel.Text = "ID " + key + " removed.";
                     ClearTextBoxes();
                     sw.Stop();
@@ -99,7 +99,7 @@ namespace MSSSStaffManagement
                 if (confirmed)
                 {
                     sw.Restart();
-                    GeneralForm.GetDictionary().Add(int.Parse(textBoxPhoneAdmin.Text), textBoxNameAdmin.Text);
+                    GeneralForm.MasterFile.Add(int.Parse(textBoxPhoneAdmin.Text), textBoxNameAdmin.Text);
                     statusLabel.Text = textBoxPhoneAdmin.Text + " " + textBoxNameAdmin.Text + " added to List.";
                     ClearTextBoxes();
                     sw.Stop();
@@ -124,7 +124,7 @@ namespace MSSSStaffManagement
         private int GenerateNewIDSimple()
         {
             int newID = 770000000;
-            while (GeneralForm.GetDictionary().ContainsKey(newID))
+            while (GeneralForm.MasterFile.ContainsKey(newID))
                 newID--;
             return newID;
         }
@@ -132,7 +132,7 @@ namespace MSSSStaffManagement
         {   // For a sorted setup.
             int newID = 7999;
             int numInterval = 0;
-            foreach (var item in GeneralForm.GetDictionary())
+            foreach (var item in GeneralForm.MasterFile)
             {
                 if (numInterval == 3) 
                 {   newID--; numInterval = 0; }
@@ -145,7 +145,7 @@ namespace MSSSStaffManagement
                     break;
                 }
             }
-            if (GeneralForm.GetDictionary().ContainsKey(newID))
+            if (GeneralForm.MasterFile.ContainsKey(newID))
                 newID = GenerateNewID();
             return newID;
         }
@@ -153,7 +153,7 @@ namespace MSSSStaffManagement
         {
             int newID = 7999;
             int numInterval = 0;
-            foreach (var item in GeneralForm.GetDictionary())
+            foreach (var item in GeneralForm.MasterFile)
             {
                 if (numInterval == 3)
                 { newID--; numInterval = 0; }
@@ -162,7 +162,7 @@ namespace MSSSStaffManagement
             }
             var rand = new Random();
             newID = int.Parse(newID.ToString() + rand.Next(10000, 99999).ToString());
-            if (GeneralForm.GetDictionary().ContainsKey(newID))
+            if (GeneralForm.MasterFile.ContainsKey(newID))
                 newID = GenerateNewIDUnsorted();
             return newID;
         }
@@ -270,8 +270,8 @@ namespace MSSSStaffManagement
         }
         private void textBox_TextChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(textBoxPhoneAdmin.Text) && GeneralForm.GetDictionary().ContainsKey(int.Parse(textBoxPhoneAdmin.Text)))
-                textBoxNameAdmin.Text = GeneralForm.GetDictionary()[int.Parse(textBoxPhoneAdmin.Text)];
+            if (!string.IsNullOrEmpty(textBoxPhoneAdmin.Text) && GeneralForm.MasterFile.ContainsKey(int.Parse(textBoxPhoneAdmin.Text)))
+                textBoxNameAdmin.Text = GeneralForm.MasterFile[int.Parse(textBoxPhoneAdmin.Text)];
             textBoxDetailsAdmin.Text = textBoxPhoneAdmin.Text + " " + textBoxNameAdmin.Text;
         }
         private void textBox_Leave(object sender, EventArgs e)
