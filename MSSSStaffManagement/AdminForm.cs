@@ -224,7 +224,8 @@ namespace MSSSStaffManagement
 
         }
         private void AdminForm_Load(object sender, EventArgs e)
-        {   // Somehow accomodate rollback
+        {
+            textBoxNameAdmin.Enabled = true;
             textBoxNameAdmin.Focus();
         }
         private void AdminForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -233,22 +234,13 @@ namespace MSSSStaffManagement
         }
         private void textBox_TextChanged(object sender, EventArgs e)
         {
-            switch ((sender as TextBox).Name)
-            {
-                case "textBoxPhoneAdmin":
-                    if (GeneralForm.GetDictionary().ContainsKey(int.Parse(textBoxPhoneAdmin.Text)))
-                        textBoxNameAdmin.Text = GeneralForm.GetDictionary()[int.Parse(textBoxPhoneAdmin.Text)];
-                    break;
-                case "textBoxNameAdmin":
-                    if (GeneralForm.GetDictionary().ContainsValue(textBoxNameAdmin.Text))
-                        textBoxPhoneAdmin.Text = GeneralForm.GetDictionary().FirstOrDefault(kvp => kvp.Value.ToString().Equals(textBoxNameAdmin.Text)).Key.ToString();
-                    break;
-            }
+            if (!string.IsNullOrEmpty(textBoxPhoneAdmin.Text) && GeneralForm.GetDictionary().ContainsKey(int.Parse(textBoxPhoneAdmin.Text)))
+                textBoxNameAdmin.Text = GeneralForm.GetDictionary()[int.Parse(textBoxPhoneAdmin.Text)];
             textBoxDetailsAdmin.Text = textBoxPhoneAdmin.Text + " " + textBoxNameAdmin.Text;
         }
         private void textBox_Leave(object sender, EventArgs e)
         {
-            textBoxPhoneAdmin.Enabled = false;
+            (sender as TextBox).Enabled = false;
         }
 
 

@@ -50,7 +50,7 @@
             // 
             this.textBoxKeyBinds.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxKeyBinds.Enabled = false;
-            this.textBoxKeyBinds.Font = new System.Drawing.Font("Lato", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxKeyBinds.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxKeyBinds.Location = new System.Drawing.Point(38, 18);
             this.textBoxKeyBinds.Multiline = true;
             this.textBoxKeyBinds.Name = "textBoxKeyBinds";
@@ -120,7 +120,6 @@
             this.textBoxNameAdmin.Name = "textBoxNameAdmin";
             this.textBoxNameAdmin.Size = new System.Drawing.Size(148, 20);
             this.textBoxNameAdmin.TabIndex = 0;
-            this.textBoxNameAdmin.TextChanged += new System.EventHandler(this.textBox_TextChanged);
             this.textBoxNameAdmin.Leave += new System.EventHandler(this.textBox_Leave);
             // 
             // textBoxPhoneAdmin
@@ -128,7 +127,6 @@
             this.textBoxPhoneAdmin.Enabled = false;
             this.textBoxPhoneAdmin.Location = new System.Drawing.Point(69, 28);
             this.textBoxPhoneAdmin.Name = "textBoxPhoneAdmin";
-            this.textBoxPhoneAdmin.ReadOnly = true;
             this.textBoxPhoneAdmin.Size = new System.Drawing.Size(148, 20);
             this.textBoxPhoneAdmin.TabIndex = 1;
             this.textBoxPhoneAdmin.TextChanged += new System.EventHandler(this.textBox_TextChanged);
