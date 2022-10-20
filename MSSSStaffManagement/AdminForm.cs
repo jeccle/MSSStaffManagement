@@ -62,9 +62,12 @@ namespace MSSSStaffManagement
             if (confirmed)
                 if (GeneralForm.GetDictionary().ContainsKey(key))
                 {
+                    var sw = Stopwatch.StartNew();
                     GeneralForm.GetDictionary().Remove(key);
                     statusLabel.Text = "ID " + key + " removed.";
                     ClearTextBoxes();
+                    sw.Stop();
+                    Trace.TraceInformation(sw.ElapsedTicks + " Ticks | RemoveItem() Dictionary");
                 }
                 else 
                 {
@@ -83,7 +86,7 @@ namespace MSSSStaffManagement
                 sw.Restart();
                 textBoxPhoneAdmin.Text = GenerateNewIDSimple().ToString();
                 sw.Stop();
-                Trace.TraceInformation(sw.ElapsedTicks + " ticks | GenerateIDUnsorted() Dictionary");
+                Trace.TraceInformation(sw.ElapsedTicks + " ticks | GenerateIDSimple() Dictionary");
             }
             if (!string.IsNullOrEmpty(textBoxNameAdmin.Text))
             {
@@ -208,7 +211,6 @@ namespace MSSSStaffManagement
             confirmed = false;
             if (e.Alt && e.KeyCode == Keys.X)
             {   // Sets focus to Name Box.
-                ClearTextBoxes();
                 textBoxNameAdmin.Enabled = true;
                 textBoxNameAdmin.Focus();
             }
@@ -268,6 +270,7 @@ namespace MSSSStaffManagement
 
 
         #endregion
+
 
 
     }

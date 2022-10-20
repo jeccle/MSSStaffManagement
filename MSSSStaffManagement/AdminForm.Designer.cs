@@ -119,6 +119,7 @@
             this.textBoxNameAdmin.Name = "textBoxNameAdmin";
             this.textBoxNameAdmin.Size = new System.Drawing.Size(148, 20);
             this.textBoxNameAdmin.TabIndex = 0;
+            this.textBoxNameAdmin.TextChanged += new System.EventHandler(this.textBox_TextChanged);
             this.textBoxNameAdmin.Leave += new System.EventHandler(this.textBox_Leave);
             // 
             // textBoxPhoneAdmin

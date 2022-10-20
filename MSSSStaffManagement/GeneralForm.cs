@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -36,13 +37,13 @@ namespace MSSSStaffManagement
             {
                 var sw = Stopwatch.StartNew();
                 using (var reader = new StreamReader(File.Open(path, FileMode.Open), Encoding.UTF8, false))
-                {                                                                       Trace.TraceInformation("Loading from " + path);
+                { Trace.TraceInformation("Loading from " + path);
                     while (!reader.EndOfStream)
                     {
                         string[] items = reader.ReadLine().Split(',');
                         MasterFile.Add(int.Parse(items[0]), items[1]);
                     }
-                    sw.Stop();                                                          Trace.TraceInformation(sw.ElapsedTicks + " ticks | ReadFile() Dictionary");
+                    sw.Stop();                                                                              Trace.TraceInformation(sw.ElapsedTicks + " ticks | ReadFile() Dictionary");
                     return "Staff List Loaded.";
                 }
             }
@@ -58,14 +59,14 @@ namespace MSSSStaffManagement
                 string[] items;
                 var sw = Stopwatch.StartNew();
                 using (StreamReader sr = File.OpenText(path))
-                {                                                                       Trace.TraceInformation("Loading from " + path);
+                { Trace.TraceInformation("Loading from " + path);
                     while (!sr.EndOfStream)
                     {
                         items = sr.ReadLine().Split(',');
                         MasterFile.Add(int.Parse(items[0]), items[1]);
                     }
                 }
-                sw.Stop();                                                              Trace.TraceInformation(sw.ElapsedTicks + " ticks | ReadFileStreamReader() Dictionary");
+                sw.Stop();                                                                                  Trace.TraceInformation(sw.ElapsedTicks + " ticks | ReadFileStreamReader() Dictionary");
                 return "Staff List Loaded.";
             }
             catch (ArgumentException)
@@ -76,7 +77,7 @@ namespace MSSSStaffManagement
         public static string ReadFileReadAllLines(string path)
         {
             try
-            {                                                                           Trace.TraceInformation("Loading from " + path);
+            { Trace.TraceInformation("Loading from " + path);
                 var sw = Stopwatch.StartNew();
                 var allLines = File.ReadLines(path);
                 foreach (var line in allLines)
@@ -84,7 +85,7 @@ namespace MSSSStaffManagement
                     string[] items = line.Split(',');
                     MasterFile.Add(int.Parse(items[0]), items[1]);
                 }
-                sw.Stop();                                                              Trace.TraceInformation(sw.ElapsedTicks + " ticks | ReadFileReadAllLines() Dictionary");
+                sw.Stop();                                                                                  Trace.TraceInformation(sw.ElapsedTicks + " ticks | ReadFileReadAllLines() Dictionary");
                 return "Staff List Loaded.";
             }
             catch (ArgumentException)
@@ -100,16 +101,13 @@ namespace MSSSStaffManagement
         {
             try
             {
-                
-                
-                var sw = Stopwatch.StartNew();                                          Trace.TraceInformation("Stopwatch start.");
+                var sw = Stopwatch.StartNew(); Trace.TraceInformation("Stopwatch start.");
                 using (StreamWriter writer = new StreamWriter(File.Open(path, FileMode.Open), Encoding.UTF8))
                 {
                     foreach (var item in MasterFile)
                         writer.WriteLine(item.Key + "," + item.Value);
                 }
-                sw.Stop();                                                              Trace.TraceInformation(sw.ElapsedMilliseconds + "ms | SaveData() Dictionary");
-
+                sw.Stop();                                                                                  Trace.TraceInformation(sw.ElapsedTicks + " ticks | SaveData() Dictionary");
                 Trace.TraceInformation("Saved to file. Path: " + path + "\n");
             }
             catch
@@ -151,7 +149,7 @@ namespace MSSSStaffManagement
             textBox.Focus();
 
         }
-        
+
         #endregion
 
         #region Form Event/Controls
@@ -172,7 +170,7 @@ namespace MSSSStaffManagement
             {   // Sets focus to Name Box.
                 textBoxPhone.Clear();
                 textBoxName.Clear();
-                FocusTextBox(textBoxName);    
+                FocusTextBox(textBoxName);
                 toolTipGen.ToolTipTitle = "Filter Name";
                 ShowToolTip("Enter Name to search.", textBoxName, 20, 17);
             }
@@ -208,7 +206,7 @@ namespace MSSSStaffManagement
             }
 
         }
-        private void GerneralForm_Load(object sender, EventArgs e)
+        private async void GerneralForm_Load(object sender, EventArgs e)
         {   // Change ReadFile method here.
             Trace.Listeners.Add(new TextWriterTraceListener("TraceLog.txt", "myListener"));
             Trace.Write("\n");
@@ -216,7 +214,7 @@ namespace MSSSStaffManagement
             DisplayItems(listBoxRead);
             textBoxPhone.Focus();
             toolTipGen.Show("Enter Phone ID to search.", textBoxPhone, 2000);
-
+            RunAllTests();
         }
         private void textBox_TextChanged(object sender, EventArgs e)
         {
@@ -260,10 +258,51 @@ namespace MSSSStaffManagement
             (sender as TextBox).Enabled = false;
         }
 
-
-
         #endregion
 
+        #region Form Test
+        private void RunAllTests()
+        {
+            OpenAdminForm();
+            AddID("testOne");
+            UpdateID(770000000, "testUser");
+            DeleteID(770000000);
+            CloseForm();
+            CloseForm();
+        }
+        private void OpenAdminForm()
+        {
+            SendKeys.SendWait("%+{TAB}");
+            SendKeys.Send("%+{A}");
+        }
+        private void AddID(string name)
+        {
+            SendKeys.Send("%+{F}");
+            SendKeys.Send(name);
+            SendKeys.Send("%+{F}");
+            SendKeys.Send("{ENTER}");
+        }
+        private void DeleteID(int ID)
+        {
+            SendKeys.Send("%+{C}");
+            SendKeys.Send(ID.ToString());
+            SendKeys.Send("%+{S}");
+            SendKeys.Send("{ENTER}");
+        }
+        private void UpdateID(int ID, string newName)
+        {
+            SendKeys.Send("%+{C}");
+            SendKeys.Send(ID.ToString());
+            SendKeys.Send("%+{X}");
+            SendKeys.Send(newName);
+            SendKeys.Send("%+{V}");
+            SendKeys.Send("{ENTER}");
+        }
+        private void CloseForm()
+        {
+            SendKeys.Send("%+{L}");
+        }
+        #endregion
 
 
     }
