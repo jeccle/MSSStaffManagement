@@ -206,7 +206,7 @@ namespace MSSSStaffManagement
             }
 
         }
-        private async void GerneralForm_Load(object sender, EventArgs e)
+        private void GerneralForm_Load(object sender, EventArgs e)
         {   // Change ReadFile method here.
             Trace.Listeners.Add(new TextWriterTraceListener("TraceLog.txt", "myListener"));
             Trace.Write("\n");
