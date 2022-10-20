@@ -216,11 +216,23 @@ namespace MSSSStaffManagement
             }
             if (e.Alt && e.KeyCode == Keys.S)
             {   // Removes item from dictionary.
-                RemoveItem(int.Parse(textBoxPhoneAdmin.Text));
+                if (!string.IsNullOrEmpty(textBoxPhoneAdmin.Text))
+                    RemoveItem(int.Parse(textBoxPhoneAdmin.Text));
+                else
+                {
+                    toolTipAdmin.ToolTipTitle = "Missing ID Input!"; 
+                    ShowToolTip("No ID to remove.", textBoxPhoneAdmin, 20, 20);
+                }
             }
             if (e.Alt && e.KeyCode == Keys.V)
             {   // Updates ID record.
-                UpdateID(int.Parse(textBoxPhoneAdmin.Text));
+                if (!string.IsNullOrEmpty(textBoxPhoneAdmin.Text))
+                    UpdateID(int.Parse(textBoxPhoneAdmin.Text));
+                else
+                {
+                    toolTipAdmin.ToolTipTitle = "Missing ID Input!";
+                    ShowToolTip("No ID to update.", textBoxPhoneAdmin, 20, 20);
+                }
             }
             if (e.Alt && e.KeyCode == Keys.T)
             {
