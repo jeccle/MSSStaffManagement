@@ -198,7 +198,6 @@ namespace MSSSStaffManagement
             confirmed = false;
             if (e.Alt && e.KeyCode == Keys.X)
             {   // Sets focus to Name Box.
-                ClearTextBoxes();
                 textBoxNameAdmin.Enabled = true;
                 textBoxNameAdmin.Focus();
             }
