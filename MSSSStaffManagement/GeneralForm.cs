@@ -34,7 +34,6 @@ namespace MSSSStaffManagement
         {
             try
             {
-
                 using (var reader = new StreamReader(File.Open(path, FileMode.Open), Encoding.UTF8, false))
                 {
                     Trace.TraceInformation("Loading from " + path);

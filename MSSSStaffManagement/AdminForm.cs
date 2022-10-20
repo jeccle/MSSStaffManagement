@@ -77,7 +77,7 @@ namespace MSSSStaffManagement
         private async void CreateID()
         {
             if (textBoxPhoneAdmin.Text.Length != 9)
-                textBoxPhoneAdmin.Text = GenerateNewIDUnsorted().ToString();
+                textBoxPhoneAdmin.Text = GenerateNewIDSimple().ToString();
             if (!string.IsNullOrEmpty(textBoxNameAdmin.Text))
             {
                 //confirmed = false;
@@ -108,6 +108,13 @@ namespace MSSSStaffManagement
         #endregion
 
         #region Utility Methods
+        private int GenerateNewIDSimple()
+        {
+            int newID = 770000000;
+            while (GeneralForm.GetDictionary().ContainsKey(newID))
+                newID--;
+            return newID;
+        }
         private int GenerateNewID()
         {   // For a sorted setup.
             int newID = 7999;
@@ -191,11 +198,15 @@ namespace MSSSStaffManagement
             confirmed = false;
             if (e.Alt && e.KeyCode == Keys.X)
             {   // Sets focus to Name Box.
+                ClearTextBoxes();
                 textBoxNameAdmin.Enabled = true;
                 textBoxNameAdmin.Focus();
             }
             if (e.Alt && e.KeyCode == Keys.C)
             {   // Sets focus to Phone ID Box.
+                ClearTextBoxes();
+                toolTipAdmin.ToolTipTitle = "Search ID";
+                ShowToolTip("Enter full ID to match existing ID.", textBoxPhoneAdmin, 20, 20);
                 textBoxPhoneAdmin.Enabled = true;
                 textBoxPhoneAdmin.Focus();
             }
