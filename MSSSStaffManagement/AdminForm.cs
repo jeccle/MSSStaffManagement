@@ -160,17 +160,17 @@ namespace MSSSStaffManagement
         private async Task ConfirmTask(Control form)
         {   // Makes a Task Completion Source that forces the application to wait for a keydown event.
             var tcs = new TaskCompletionSource<bool>();
-            void LocalHandler(object s, KeyEventArgs a)
-            {
+            void LocalHandler(object s, KeyEventArgs a)     // Makes a local event handler method that takes a keypress and checks its value.
+            {                                               // If it is 'ENTER' it will confirm the action within the form by changing the confirmed bool.
                 if (a.KeyCode == Keys.Enter)
                     confirmed = true;
                 else
                     confirmed = false;
                 tcs.SetResult(true);
             }
-            form.KeyDown += LocalHandler;
-            await tcs.Task;
-            form.KeyDown -= LocalHandler;
+            form.KeyDown += LocalHandler;                   // Adds the handler to the form.keyDown event.
+            await tcs.Task;                                 // Awaits the completion of the task.
+            form.KeyDown -= LocalHandler;                   // Removes the handler.
             
         }
         private void ClearTextBoxes()
