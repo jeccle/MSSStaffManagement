@@ -67,9 +67,9 @@ namespace MSSSStaffManagement
                 {
                     var sw = Stopwatch.StartNew();
                     GeneralForm.MasterFile.Remove(key);
+                    sw.Stop();
                     statusLabel.Text = "ID " + key + " removed.";
                     ClearTextBoxes();
-                    sw.Stop();
                     Trace.TraceInformation(sw.ElapsedTicks + " Ticks | RemoveItem() Dictionary");
                 }
                 else 
