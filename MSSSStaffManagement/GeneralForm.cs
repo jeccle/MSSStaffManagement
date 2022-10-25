@@ -38,7 +38,7 @@ namespace MSSSStaffManagement
             try
             {
                 var sw = Stopwatch.StartNew();
-                using (var reader = new StreamReader(File.Open(path, FileMode.Open), Encoding.UTF8, false))
+                using (var reader = new StreamReader(File.OpenRead(path), Encoding.UTF8, false))
                 { 
                     Trace.TraceInformation("Loading from " + path);
                     while (!reader.EndOfStream)
@@ -196,7 +196,7 @@ namespace MSSSStaffManagement
                 foreach (var item in MasterFile)
                     csv.AppendLine(item.Key + "," + item.Value);
                 File.AppendAllText(path, csv.ToString());
-
+                
                 sw.Stop(); 
                 Trace.TraceInformation(sw.ElapsedTicks + " ticks | SaveDataSBNoStreamWriter() Dictionary");
                 Trace.TraceInformation("Saved to file. Path: " + path + "\n");
@@ -355,35 +355,38 @@ namespace MSSSStaffManagement
         #endregion
 
         #region Form Test
-        private void RunAllTests()
+        private async void RunAllTests()
         {
-            OpenAdminForm();
-            AddID("testOne");
-            UpdateID(770000000, "testUser");
-            DeleteID(770000000);
+            await OpenAdminForm();
+            await AddID("testOne");
+            await UpdateID(770000000, "testUser");
+            await DeleteID(770000000);
             CloseForm();
             CloseForm();
         }
-        private void OpenAdminForm()
+        private Task OpenAdminForm()
         {   // Remove comments if the program is not being focused.
             //SendKeys.SendWait("%+{TAB}");
             SendKeys.Send("%+{A}");
+            return Task.CompletedTask;
         }
-        private void AddID(string name)
+        private Task AddID(string name)
         {
             SendKeys.Send("%+{F}");
             SendKeys.Send(name);
             SendKeys.Send("%+{F}");
             SendKeys.Send("{ENTER}");
+            return Task.CompletedTask;
         }
-        private void DeleteID(int ID)
+        private Task DeleteID(int ID)
         {
             SendKeys.Send("%+{C}");
             SendKeys.Send(ID.ToString());
             SendKeys.Send("%+{S}");
             SendKeys.Send("{ENTER}");
+            return Task.CompletedTask;
         }
-        private void UpdateID(int ID, string newName)
+        private Task UpdateID(int ID, string newName)
         {
             SendKeys.Send("%+{C}");
             SendKeys.Send(ID.ToString());
@@ -391,6 +394,7 @@ namespace MSSSStaffManagement
             SendKeys.Send(newName);
             SendKeys.Send("%+{V}");
             SendKeys.Send("{ENTER}");
+            return Task.CompletedTask;
         }
         private void CloseForm()
         {
