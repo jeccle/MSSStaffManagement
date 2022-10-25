@@ -39,13 +39,15 @@ namespace MSSSStaffManagement
             {
                 var sw = Stopwatch.StartNew();
                 using (var reader = new StreamReader(File.Open(path, FileMode.Open), Encoding.UTF8, false))
-                { Trace.TraceInformation("Loading from " + path);
+                { 
+                    Trace.TraceInformation("Loading from " + path);
                     while (!reader.EndOfStream)
                     {
                         string[] items = reader.ReadLine().Split(',');
                         MasterFile.Add(int.Parse(items[0]), items[1]);
                     }
-                    sw.Stop();                                           Trace.TraceInformation(sw.ElapsedTicks + " ticks | ReadFileDefault() Dictionary");
+                    sw.Stop();                                           
+                    Trace.TraceInformation(sw.ElapsedTicks + " ticks | ReadFileDefault() Dictionary");
                     return "Staff List Loaded.";
                 }
             }
@@ -61,15 +63,17 @@ namespace MSSSStaffManagement
                 string[] items;
                 var sw = Stopwatch.StartNew();
                 using (StreamReader sr = File.OpenText(path))
-                { Trace.TraceInformation("Loading from " + path);
+                { 
+                    Trace.TraceInformation("Loading from " + path);
                     while (!sr.EndOfStream)
                     {
                         items = sr.ReadLine().Split(',');
                         MasterFile.Add(int.Parse(items[0]), items[1]);
                     }
+                    sw.Stop(); Trace.TraceInformation(sw.ElapsedTicks + " ticks | ReadFileSROpenText() Dictionary");
+                    return "Staff List Loaded.";
                 }
-                sw.Stop();                                         Trace.TraceInformation(sw.ElapsedTicks + " ticks | ReadFileSROpenText() Dictionary");
-                return "Staff List Loaded.";
+                
             }
             catch (ArgumentException)
             {
@@ -108,10 +112,10 @@ namespace MSSSStaffManagement
                         string[] items = sr.ReadLine().Split(',');
                         MasterFile.Add(int.Parse(items[0]), items[1]);
                     }
-                    
+                    sw.Stop(); Trace.TraceInformation(sw.ElapsedTicks + " ticks | ReadFileSROpenReadReadLine() Dictionary");
+                    return "Staff List Loaded.";
                 }
-                sw.Stop(); Trace.TraceInformation(sw.ElapsedTicks + " ticks | ReadFileSROpenReadReadLine() Dictionary");
-                return "Staff List Loaded.";
+                
             }
             catch (ArgumentException)
             {
@@ -131,10 +135,10 @@ namespace MSSSStaffManagement
                         string[] items = tr.ReadLine().Split(',');
                         MasterFile.Add(int.Parse(items[0]), items[1]);
                     }
-
+                    sw.Stop(); Trace.TraceInformation(sw.ElapsedTicks + " ticks | ReadFileTROpenText() Dictionary");
+                    return "Staff List Loaded.";
                 }
-                sw.Stop(); Trace.TraceInformation(sw.ElapsedTicks + " ticks | ReadFileTROpenText() Dictionary");
-                return "Staff List Loaded.";
+               
             }
             catch (ArgumentException)
             {
@@ -304,7 +308,7 @@ namespace MSSSStaffManagement
         {
             FocusTextBox(textBoxName);
             ShowToolTip("Enter Phone ID to search.", textBoxPhone, 20, 20);
-            RunAllTests();
+            //RunAllTests();
         }
         private void textBox_TextChanged(object sender, EventArgs e)
         {
