@@ -308,7 +308,7 @@ namespace MSSSStaffManagement
         {
             FocusTextBox(textBoxName);
             ShowToolTip("Enter Phone ID to search.", textBoxPhone, 20, 20);
-            //RunAllTests();
+            RunAllTests();
         }
         private void textBox_TextChanged(object sender, EventArgs e)
         {
