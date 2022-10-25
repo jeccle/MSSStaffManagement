@@ -56,14 +56,6 @@ namespace MSSSStaffManagement
             }
         }
         /// <summary>
-        /// Retrieves the MasterFile dictionary from current scope.
-        /// </summary>
-        /// <returns>Returns MasterFile Dictionary</returns>
-        public static Dictionary<int, string> GetDictionary()
-        {
-            return MasterFile;
-        }
-        /// <summary>
         /// Saves data to specified path. Data is written to file using streamwriter.
         /// </summary>
         /// <param name="path">File Path</param>
