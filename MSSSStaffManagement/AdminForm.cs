@@ -36,10 +36,13 @@ namespace MSSSStaffManagement
             await ConfirmTask(this);
             if (confirmed)
             {
+                var sw = Stopwatch.StartNew();
                 var dict = GeneralForm.MasterFile;
                 if (dict.ContainsKey(key))
                 {
                     dict[key] = textBoxNameAdmin.Text;
+                    sw.Stop();
+                    Trace.TraceInformation(sw.ElapsedTicks + " Ticks | UpdateID() Dictionary");
                     statusLabel.Text = "ID " + key + " Name Updated to " + textBoxNameAdmin.Text;
                 }
                 else
