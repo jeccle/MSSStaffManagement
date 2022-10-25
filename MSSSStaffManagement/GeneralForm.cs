@@ -33,7 +33,7 @@ namespace MSSSStaffManagement
         #region Global Methods
 
             #region Read File Methods
-        public static string ReadFile(string path)
+        public static string ReadFileDefault(string path)
         {
             try
             {
@@ -45,7 +45,7 @@ namespace MSSSStaffManagement
                         string[] items = reader.ReadLine().Split(',');
                         MasterFile.Add(int.Parse(items[0]), items[1]);
                     }
-                    sw.Stop();                                           Trace.TraceInformation(sw.ElapsedTicks + " ticks | ReadFile() Dictionary");
+                    sw.Stop();                                           Trace.TraceInformation(sw.ElapsedTicks + " ticks | ReadFileDefault() Dictionary");
                     return "Staff List Loaded.";
                 }
             }
@@ -142,7 +142,8 @@ namespace MSSSStaffManagement
             }
         }
         #endregion
-        public static void SaveData(string path)
+        #region SaveData Methods
+        public static void SaveDataDefault(string path)
         {
             try
             {
@@ -152,7 +153,7 @@ namespace MSSSStaffManagement
                     foreach (var item in MasterFile)
                         writer.WriteLine(item.Key + "," + item.Value);
                 }
-                sw.Stop();                                                                                  Trace.TraceInformation(sw.ElapsedTicks + " ticks | SaveData() Dictionary");
+                sw.Stop();                                                                                  Trace.TraceInformation(sw.ElapsedTicks + " ticks | SaveDataDefault() Dictionary");
                 Trace.TraceInformation("Saved to file. Path: " + path + "\n");
             }
             catch
@@ -160,6 +161,48 @@ namespace MSSSStaffManagement
                 Trace.TraceInformation("Error occurred during saving");
             }
         }
+        public static void SaveDataStringBuilder(string path)
+        {
+            try
+            {
+                var sw = Stopwatch.StartNew();
+                var csv = new StringBuilder();
+                using (StreamWriter writer = new StreamWriter(File.Open(path, FileMode.Open), Encoding.UTF8))
+                {
+                    foreach (var item in MasterFile)
+                        csv.AppendLine(item.Key + "," + item.Value);
+                    writer.Write(csv.ToString());
+                }
+                sw.Stop(); 
+                Trace.TraceInformation(sw.ElapsedTicks + " ticks | SaveDataStringBuilder() Dictionary");
+                Trace.TraceInformation("Saved to file. Path: " + path + "\n");
+            }
+            catch
+            {
+                Trace.TraceInformation("Error occurred during saving");
+            }
+        }
+        public static void SaveDataSBNoStreamWriter(string path)
+        {
+            try
+            {
+                var sw = Stopwatch.StartNew();
+
+                var csv = new StringBuilder();
+                foreach (var item in MasterFile)
+                    csv.AppendLine(item.Key + "," + item.Value);
+                File.AppendAllText(path, csv.ToString());
+
+                sw.Stop(); 
+                Trace.TraceInformation(sw.ElapsedTicks + " ticks | SaveDataSBNoStreamWriter() Dictionary");
+                Trace.TraceInformation("Saved to file. Path: " + path + "\n");
+            }
+            catch
+            {
+                Trace.TraceInformation("Error occurred during saving");
+            }
+        }
+        #endregion
         public static void SetDictionary(Dictionary<int, string> dict)
         {
             MasterFile = dict;
@@ -192,7 +235,6 @@ namespace MSSSStaffManagement
             textBox.ReadOnly = false;
             textBox.Enabled = true;
             textBox.Focus();
-
         }
 
         #endregion
@@ -255,8 +297,13 @@ namespace MSSSStaffManagement
         {   // Change ReadFile method here.
             Trace.Listeners.Add(new TextWriterTraceListener("TraceLog.txt", "myListener"));
             Trace.Write("\n");
-            statusLabel.Text = ReadFileTROpenText(path);
+            statusLabel.Text = ReadFileDefault(path);
             DisplayItems(listBoxRead);
+        }
+        private void GeneralForm_Shown(object sender, EventArgs e)
+        {
+            FocusTextBox(textBoxName);
+            ShowToolTip("Enter Phone ID to search.", textBoxPhone, 20, 20);
             RunAllTests();
         }
         private void textBox_TextChanged(object sender, EventArgs e)
@@ -300,11 +347,7 @@ namespace MSSSStaffManagement
         {
             (sender as TextBox).Enabled = false;
         }
-        private void GeneralForm_Shown(object sender, EventArgs e)
-        {
-            FocusTextBox(textBoxName);
-            ShowToolTip("Enter Phone ID to search.", textBoxPhone, 20, 20);
-        }
+        
         #endregion
 
         #region Form Test
@@ -318,8 +361,8 @@ namespace MSSSStaffManagement
             CloseForm();
         }
         private void OpenAdminForm()
-        {
-            SendKeys.SendWait("%+{TAB}");
+        {   // Remove comments if the program is not being focused.
+            //SendKeys.SendWait("%+{TAB}");
             SendKeys.Send("%+{A}");
         }
         private void AddID(string name)

@@ -266,7 +266,7 @@ namespace MSSSStaffManagement
         }
         private void AdminForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            GeneralForm.SaveData(@"MalinStaffNamesV2.csv");
+            GeneralForm.SaveDataSBNoStreamWriter(@"MalinStaffNamesV2.csv");
         }
         private void textBox_TextChanged(object sender, EventArgs e)
         {
