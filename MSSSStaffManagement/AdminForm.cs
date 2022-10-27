@@ -103,10 +103,10 @@ namespace MSSSStaffManagement
                 {
                     sw.Restart();
                     GeneralForm.MasterFile.Add(int.Parse(textBoxPhoneAdmin.Text), textBoxNameAdmin.Text);
-                    statusLabel.Text = textBoxPhoneAdmin.Text + " " + textBoxNameAdmin.Text + " added to List.";
-                    ClearTextBoxes();
                     sw.Stop();
                     Trace.TraceInformation(sw.ElapsedTicks + " ticks. | CreateID() Dictionary");
+                    statusLabel.Text = textBoxPhoneAdmin.Text + " " + textBoxNameAdmin.Text + " added to List.";
+                    ClearTextBoxes();
                 }
                 else
                 {
