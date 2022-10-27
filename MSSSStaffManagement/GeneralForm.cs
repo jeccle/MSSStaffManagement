@@ -351,7 +351,14 @@ namespace MSSSStaffManagement
         {
             (sender as TextBox).Enabled = false;
         }
-        
+        private void textBoxPhone_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = textBoxPhone.Text.Length > 9 || !char.IsDigit(e.KeyChar);
+        }
+        private void textBoxName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = char.IsDigit(e.KeyChar);
+        }
         #endregion
 
         #region Form Test
