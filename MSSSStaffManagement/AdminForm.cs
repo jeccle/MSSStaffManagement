@@ -269,7 +269,14 @@ namespace MSSSStaffManagement
             (sender as TextBox).Enabled = false;
         }
 
-
+        private void textBoxPhoneAdmin_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = textBoxPhoneAdmin.Text.Length > 9 || !char.IsDigit(e.KeyChar);
+        }
+        private void textBoxNameAdmin_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = char.IsDigit(e.KeyChar);
+        }
 
 
         #endregion

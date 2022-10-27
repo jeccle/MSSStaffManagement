@@ -72,6 +72,7 @@
             this.textBoxPhone.Size = new System.Drawing.Size(102, 20);
             this.textBoxPhone.TabIndex = 2;
             this.textBoxPhone.TextChanged += new System.EventHandler(this.textBox_TextChanged);
+            this.textBoxPhone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxPhone_KeyPress);
             this.textBoxPhone.Leave += new System.EventHandler(this.textBox_Leave);
             // 
             // textBoxName
@@ -82,6 +83,7 @@
             this.textBoxName.Size = new System.Drawing.Size(102, 20);
             this.textBoxName.TabIndex = 3;
             this.textBoxName.TextChanged += new System.EventHandler(this.textBox_TextChanged);
+            this.textBoxName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxName_KeyPress);
             this.textBoxName.Leave += new System.EventHandler(this.textBox_Leave);
             // 
             // labelPhone

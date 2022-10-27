@@ -254,6 +254,14 @@ namespace MSSSStaffManagement
             FocusTextBox(textBoxName);
             ShowToolTip("Enter Phone ID to search.", textBoxPhone, 20, 20);
         }
+        private void textBoxPhone_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = textBoxPhone.Text.Length > 9 || !char.IsDigit(e.KeyChar);
+        }
+        private void textBoxName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = char.IsDigit(e.KeyChar);
+        }
 
         #endregion
 

@@ -121,6 +121,7 @@
             this.textBoxNameAdmin.Size = new System.Drawing.Size(148, 20);
             this.textBoxNameAdmin.TabIndex = 0;
             this.textBoxNameAdmin.TextChanged += new System.EventHandler(this.textBox_TextChanged);
+            this.textBoxNameAdmin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxNameAdmin_KeyPress);
             this.textBoxNameAdmin.Leave += new System.EventHandler(this.textBox_Leave);
             // 
             // textBoxPhoneAdmin
@@ -131,6 +132,7 @@
             this.textBoxPhoneAdmin.Size = new System.Drawing.Size(148, 20);
             this.textBoxPhoneAdmin.TabIndex = 1;
             this.textBoxPhoneAdmin.TextChanged += new System.EventHandler(this.textBox_TextChanged);
+            this.textBoxPhoneAdmin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxPhoneAdmin_KeyPress);
             this.textBoxPhoneAdmin.Leave += new System.EventHandler(this.textBox_Leave);
             // 
             // statusStrip
