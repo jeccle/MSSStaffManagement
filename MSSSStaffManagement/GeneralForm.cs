@@ -28,11 +28,12 @@ namespace MSSSStaffManagement
         }
         public static Dictionary<int, string> MasterFile = new Dictionary<int, string>();
         public static Dictionary<int, string> backupDict;
+        static bool rolledBack;
         string path = @"MalinStaffNamesV2.csv";
 
         #region Global Methods
 
-            #region Read File Methods
+        #region Read File Methods
         public static string ReadFileDefault(string path)
         {
             try
@@ -55,6 +56,10 @@ namespace MSSSStaffManagement
             catch (ArgumentException)
             {
                 return "Values already exist within list.";
+            }
+            catch
+            {
+                return "Cannot open file, File may be corrupted.";
             }
         }
         public static string ReadFileSROpenText(string path)
@@ -256,6 +261,8 @@ namespace MSSSStaffManagement
                     adminForm.ShowDialog();
                     DisplayItems(listBoxRead);
                     statusLabel.Text = "List has been updated.";
+                    if (rolledBack)
+                        statusLabel.Text = "List has been rolled back to application start state.";
                     listBoxFiltered.Items.Clear();
                 }
             }
@@ -368,9 +375,9 @@ namespace MSSSStaffManagement
         {
             await OpenAdminForm();
             await AddID("testOne");
-            await UpdateID(770000000, "testUser");
-            await DeleteID(770000000);
-            CloseForm();
+            await UpdateID(774481751, "testUser");
+            await DeleteID(774481751);
+            await RollBack();
             CloseForm();
         }
         private Task OpenAdminForm()
@@ -403,6 +410,11 @@ namespace MSSSStaffManagement
             SendKeys.Send(newName);
             SendKeys.Send("%+{V}");
             SendKeys.Send("{ENTER}");
+            return Task.CompletedTask;
+        }
+        private Task RollBack()
+        {
+            SendKeys.Send("%+{T}");
             return Task.CompletedTask;
         }
         private void CloseForm()

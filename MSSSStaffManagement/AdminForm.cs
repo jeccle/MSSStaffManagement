@@ -257,6 +257,7 @@ namespace MSSSStaffManagement
                 statusLabel.Text = "Rolling back.";
                 toolTipAdmin.ToolTipTitle = "Data Rollback";
                 ShowToolTip("Rolled Back to Launch State", groupBoxKeyBinds, 80, 100);
+                Trace.WriteLine("Rolled Back to Launch State");
                 rollback = GeneralForm.SetDictionary(GeneralForm.backupDict);
                 Close();
             }
