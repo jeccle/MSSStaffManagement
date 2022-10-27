@@ -27,7 +27,7 @@ namespace MSSSStaffManagement
             InitializeComponent();
         }
         public static Dictionary<int, string> MasterFile = new Dictionary<int, string>();
-        public static Dictionary<int, string> backupDict = MasterFile;
+        public static Dictionary<int, string> backupDict;
         string path = @"MalinStaffNamesV2.csv";
 
         #region Global Methods
@@ -48,6 +48,7 @@ namespace MSSSStaffManagement
                     }
                     sw.Stop();                                           
                     Trace.TraceInformation(sw.ElapsedTicks + " ticks | ReadFileDefault() Dictionary");
+                    backupDict = new Dictionary<int, string>(MasterFile);
                     return "Staff List Loaded.";
                 }
             }
@@ -207,9 +208,10 @@ namespace MSSSStaffManagement
             }
         }
         #endregion
-        public static void SetDictionary(Dictionary<int, string> dict)
+        public static bool SetDictionary(Dictionary<int, string> dict)
         {
-            MasterFile = dict;
+            MasterFile = new Dictionary<int, string>(dict);
+            return true;
         }
         #endregion
 
@@ -308,7 +310,7 @@ namespace MSSSStaffManagement
         {
             FocusTextBox(textBoxName);
             ShowToolTip("Enter Phone ID to search.", textBoxPhone, 20, 20);
-            RunAllTests();
+            //RunAllTests();
         }
         private void textBox_TextChanged(object sender, EventArgs e)
         {

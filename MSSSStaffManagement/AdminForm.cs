@@ -24,6 +24,7 @@ namespace MSSSStaffManagement
         }
 
         bool confirmed;
+        bool rollback;
 
         #region Control Methods
         private async void UpdateID(int key)
@@ -211,7 +212,7 @@ namespace MSSSStaffManagement
         #region Form Events
         private void AdminForm_KeyDown(object sender, KeyEventArgs e)
         {
-            confirmed = false;
+            confirmed = rollback = false;
             if (e.Alt && e.KeyCode == Keys.X)
             {   // Sets focus to Name Box.
                 textBoxNameAdmin.Enabled = true;
@@ -256,7 +257,8 @@ namespace MSSSStaffManagement
                 statusLabel.Text = "Rolling back.";
                 toolTipAdmin.ToolTipTitle = "Data Rollback";
                 ShowToolTip("Rolled Back to Launch State", groupBoxKeyBinds, 80, 100);
-                GeneralForm.SetDictionary(GeneralForm.backupDict);
+                rollback = GeneralForm.SetDictionary(GeneralForm.backupDict);
+                Close();
             }
             if (e.Alt && e.KeyCode == Keys.L)
                 Close();
@@ -269,7 +271,8 @@ namespace MSSSStaffManagement
         }
         private void AdminForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            GeneralForm.SaveDataDefault(@"MalinStaffNamesV2.csv");
+            if (!rollback)
+                GeneralForm.SaveDataDefault(@"MalinStaffNamesV2.csv");
         }
         private void textBox_TextChanged(object sender, EventArgs e)
         {
