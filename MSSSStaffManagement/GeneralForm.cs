@@ -26,7 +26,7 @@ namespace MSSSStaffManagement
             InitializeComponent();
         }
         public static Dictionary<int, string> MasterFile = new Dictionary<int, string>();
-        public static Dictionary<int, string> backupDict = MasterFile;
+        public static Dictionary<int, string> backupDict;
         string path = @"MalinStaffNamesV2.csv";
 
         #region Global Methods
@@ -47,6 +47,7 @@ namespace MSSSStaffManagement
                         string[] items = reader.ReadLine().Split(',');
                         MasterFile.Add(int.Parse(items[0]), items[1]);
                     }
+                    backupDict = new Dictionary<int, string>(MasterFile);
                     return "Staff List Loaded.";
                 }
             }

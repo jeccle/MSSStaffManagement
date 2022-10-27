@@ -244,6 +244,7 @@ namespace MSSSStaffManagement
                 toolTipAdmin.ToolTipTitle = "Data Rollback";
                 ShowToolTip("Rolled Back to Launch State", groupBoxKeyBinds, 80, 100);
                 GeneralForm.SetDictionary(GeneralForm.backupDict);
+                Close();
             }
             if (e.Alt && e.KeyCode == Keys.L)
                 Close();
