@@ -27,6 +27,7 @@ namespace MSSSStaffManagement
         }
         public static Dictionary<int, string> MasterFile = new Dictionary<int, string>();
         public static Dictionary<int, string> backupDict;
+        static bool rolledBack;
         string path = @"MalinStaffNamesV2.csv";
 
         #region Global Methods
@@ -149,6 +150,8 @@ namespace MSSSStaffManagement
                     adminForm.ShowDialog();
                     DisplayItems(listBoxRead);
                     statusLabel.Text = "List has been updated.";
+                    if (rolledBack)
+                        statusLabel.Text = "List has been reverted to application start.";
                     listBoxFiltered.Items.Clear();
                 }
             }
