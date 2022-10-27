@@ -317,7 +317,7 @@ namespace MSSSStaffManagement
         {
             FocusTextBox(textBoxName);
             ShowToolTip("Enter Phone ID to search.", textBoxPhone, 20, 20);
-            //RunAllTests();
+            RunAllTests();
         }
         private void textBox_TextChanged(object sender, EventArgs e)
         {
@@ -373,7 +373,7 @@ namespace MSSSStaffManagement
         #region Form Test
         private async void RunAllTests()
         {
-            await OpenAdminForm();
+            OpenAdminForm();
             await AddID("testOne");
             await UpdateID(774481751, "testUser");
             await DeleteID(774481751);
