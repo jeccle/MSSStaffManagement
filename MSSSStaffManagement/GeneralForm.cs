@@ -25,12 +25,14 @@ namespace MSSSStaffManagement
         {
             InitializeComponent();
         }
+        // [Q4.1]
         public static Dictionary<int, string> MasterFile = new Dictionary<int, string>();
         public static Dictionary<int, string> backupDict;
         static bool rolledBack;
         string path = @"MalinStaffNamesV2.csv";
 
         #region Global Methods
+        // [4.2]
         /// <summary>
         /// Read content from a specified file path. Content is retrieved from a csv file and added to a global dictionary data structure.
         /// </summary>
@@ -54,9 +56,10 @@ namespace MSSSStaffManagement
             }
             catch (ArgumentException)
             {
-                return "Values already exist within list.";
+                return "Error loading from file.";
             }
         }
+        // [Q5.6]
         /// <summary>
         /// Saves data to specified path. Data is written to file using streamwriter.
         /// </summary>
@@ -88,6 +91,7 @@ namespace MSSSStaffManagement
         #endregion
 
         #region Utility Methods     
+        // [Q4.8
         /// <summary>
         /// Displays selected value in textBoxes.
         /// </summary>
@@ -99,6 +103,7 @@ namespace MSSSStaffManagement
             textBoxName.Text = kvp[1];
             statusLabel.Text = item + " selected.";
         }
+        // [Q4.3]
         /// <summary>
         /// Displays all items within MasterFile to specified listBox.
         /// </summary>
@@ -112,7 +117,7 @@ namespace MSSSStaffManagement
             }
         }
         /// <summary>
-        /// Outputs tooltip in a bubble form pointingn upwards.
+        /// Outputs tooltip in a bubble form pointing upwards.
         /// </summary>
         /// <param name="message">String caption to display on tooltip</param>
         /// <param name="control">Associated control involved with process.</param>
@@ -136,6 +141,7 @@ namespace MSSSStaffManagement
         #endregion
 
         #region Form Event/Controls
+        // [Q4.6, 4.7, 4.8]
         /// <summary>
         /// Keydown event handler that acts as the control hub for the application.
         /// Responds to all user input and prompts allication behaviour to match specified key bindings.
@@ -144,7 +150,7 @@ namespace MSSSStaffManagement
         {   // Activiate KeyPreview property
             if (e.Alt && e.KeyCode == Keys.A)
             {
-                if (!string.IsNullOrEmpty(listBoxFiltered.SelectedIndex.ToString()))
+                if (!string.IsNullOrEmpty(listBoxFiltered.SelectedIndex.ToString()))        //[Q4.9]
                 {
                     AdminForm adminForm = new AdminForm(textBoxPhone.Text, textBoxName.Text); // Parse parameters when you get up to it.
                     adminForm.ShowDialog();
@@ -155,7 +161,7 @@ namespace MSSSStaffManagement
                     listBoxFiltered.Items.Clear();
                 }
             }
-            if (e.Alt && e.KeyCode == Keys.X)
+            if (e.Alt && e.KeyCode == Keys.X)       // [Q4.6]
             {   // Sets focus to Name Box.
                 textBoxPhone.Clear();
                 textBoxName.Clear();
@@ -163,7 +169,7 @@ namespace MSSSStaffManagement
                 toolTipGen.ToolTipTitle = "Filter Name";
                 ShowToolTip("Enter Name to search.", textBoxName, 20, 17);
             }
-            if (e.Alt && e.KeyCode == Keys.C)
+            if (e.Alt && e.KeyCode == Keys.C)       // [Q4.7]
             {   // Sets focus to Phone Box.
                 textBoxName.Clear();
                 FocusTextBox(textBoxPhone);
@@ -206,6 +212,7 @@ namespace MSSSStaffManagement
             statusLabel.Text = ReadFile(path);
             DisplayItems(listBoxRead);
         }
+        // [Q4.4, 4.5]
         /// <summary>
         /// Checks textboxes for input, when there is input it is matched against each value
         /// within MasterFile and if the values match they are displayed in a filtered listBox.
@@ -258,10 +265,20 @@ namespace MSSSStaffManagement
             FocusTextBox(textBoxName);
             ShowToolTip("Enter Phone ID to search.", textBoxPhone, 20, 20);
         }
+        /// <summary>
+        /// Restricts keypress to values under 9 and only digits.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void textBoxPhone_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = textBoxPhone.Text.Length > 9 || !char.IsDigit(e.KeyChar);
         }
+        /// <summary>
+        /// Keypress values to restrict digits within the name box..
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void textBoxName_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = char.IsDigit(e.KeyChar);
