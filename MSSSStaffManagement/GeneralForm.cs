@@ -10,13 +10,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 /*
- *  Filter Keypress inputs.
- *  Add tooltips to controls.
- *  Remove mouse click functionality
- *  Figure out how to stop admin form from focusing key binding textbox.
- *  Format tab indexes
- * 
+ * Jasper Eccles 
+ * 30034164 
+ * 2/11/2022
+ * Malin Space Science Staff Management Program
+ * Holds a large list of staff names and IDs, displays within text boxes and allows for 
+ * manipulation of data through a modal admin form.
  */
+
+
 namespace MSSSStaffManagement
 {
     public partial class GeneralForm : Form
