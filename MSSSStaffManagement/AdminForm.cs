@@ -289,10 +289,14 @@ namespace MSSSStaffManagement
         private void textBoxPhoneAdmin_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = textBoxPhoneAdmin.Text.Length > 9 || !char.IsDigit(e.KeyChar);
+            if (e.KeyChar == (char)Keys.Back)
+                e.Handled = false;
         }
         private void textBoxNameAdmin_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = char.IsDigit(e.KeyChar);
+            if (e.KeyChar == (char)Keys.Back)
+                e.Handled = false;
         }
 
         #endregion
