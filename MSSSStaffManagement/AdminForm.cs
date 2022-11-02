@@ -370,6 +370,9 @@ namespace MSSSStaffManagement
         private void textBoxPhoneAdmin_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = textBoxPhoneAdmin.Text.Length > 9 || !char.IsDigit(e.KeyChar);
+            // Enable backspace
+            if (e.KeyChar == (char)Keys.Back)
+                e.Handled = false;
         }
         /// <summary>
         /// Keypress values to restrict digits within the name box..
@@ -379,6 +382,9 @@ namespace MSSSStaffManagement
         private void textBoxNameAdmin_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = char.IsDigit(e.KeyChar);
+            // Enable backspace
+            if (e.KeyChar == (char)Keys.Back)
+                e.Handled = false;
         }
 
 

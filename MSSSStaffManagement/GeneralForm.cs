@@ -262,7 +262,7 @@ namespace MSSSStaffManagement
         /// <param name="e"></param>
         private void GeneralForm_Shown(object sender, EventArgs e)
         {
-            FocusTextBox(textBoxName);
+            FocusTextBox(textBoxPhone);
             ShowToolTip("Enter Phone ID to search.", textBoxPhone, 20, 20);
         }
         /// <summary>
@@ -273,6 +273,9 @@ namespace MSSSStaffManagement
         private void textBoxPhone_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = textBoxPhone.Text.Length > 9 || !char.IsDigit(e.KeyChar);
+            // Enable backspace
+            if (e.KeyChar == (char)Keys.Back)
+                e.Handled = false;
         }
         /// <summary>
         /// Keypress values to restrict digits within the name box..
@@ -282,6 +285,9 @@ namespace MSSSStaffManagement
         private void textBoxName_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = char.IsDigit(e.KeyChar);
+            // Enable backspace
+            if (e.KeyChar == (char)Keys.Back)
+                e.Handled = false;
         }
 
         #endregion
